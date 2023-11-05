@@ -2,7 +2,7 @@ const { ClientError } = require("../utils/error/error");
 
 const deleteElement = async (id, model, name) => {
   const elementToDelete = await model.findById(id);
-  if (!elementToDelete) throw new Error(`${name} not found`);
+  if (!elementToDelete) throw new ClientError(`${name} not found`);
 
   elementToDelete.isDeleted = true;
   await elementToDelete.save();
@@ -12,14 +12,14 @@ const deleteElement = async (id, model, name) => {
 
 const findElement = async (id, model, name) => {
   const elementToFind = await model.findById(id);
-  if (!elementToFind) throw new Error(`${name} not found`);
+  if (!elementToFind) throw new ClientError(`${name} not found`);
 
   return elementToFind;
 };
 
 const patchElement = async (id, body, model, name) => {
   const elementToPatch = await model.findById(id);
-  if (!elementToPatch) throw new Error(`${name} not found`);
+  if (!elementToPatch) throw new ClientError(`${name} not found`);
 
   for (const key in body) {
     elementToPatch[key] = body[key];
@@ -31,7 +31,7 @@ const patchElement = async (id, body, model, name) => {
 
 const updateElement = async (id, body, model, name) => {
   const elementToUpdate = await model.findById(id);
-  if (!elementToUpdate) throw new Error(`${name} not found`);
+  if (!elementToUpdate) throw new ClientError(`${name} not found`);
 
   elementToUpdate.set(body);
   await elementToUpdate.save();
