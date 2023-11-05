@@ -1,14 +1,14 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-const peopleSchema = mongoose.Schema({
+const peopleSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
     trim: true,
-    unique: true,
   },
   height: {
-    type: String,
+    type: Number,
+    default: 175,
   },
   mass: {
     type: String,

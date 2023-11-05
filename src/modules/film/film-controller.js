@@ -1,15 +1,13 @@
 const Film = require("./film-model");
 const { ClientError } = require("../../utils/errors/error");
 const { customResponse } = require("../../utils/errors/custom-response");
-const { create } = require("./film-service");
 const { globalService } = require("../../utils/global-service/global-service");
+const { createFilm } = require("./film-service");
 
 const postFilm = (req, res) => {
   const { body: data } = req;
 
-  const newFilm = create(data);
-
-  if (!newFilm) throw new ClientError("Error to create film", 409);
+  const newFilm = createFilm(data);
 
   customResponse(res, 200, { message: "Film created", newFilm });
 };
@@ -32,7 +30,13 @@ const patchFilm = (req, res) => {
   customResponse(res, 200, { message: "Film updated", film });
 };
 
-const getAllFilm = (req, res) => {};
+const getAllFilm = (req, res) => {
+  const { query } = req;
+
+  const films = globalService.findAllElement(Film, query, "Films");
+
+  customResponse(res, 200, { message: "Films finded", films });
+};
 
 const getFilm = (req, res) => {
   const { id } = req.params;

@@ -1,11 +1,10 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-const starshipSchema = mongoose.Schema({
+const starshipSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
     trim: true,
-    unique: true,
   },
   model: {
     type: String,
@@ -14,31 +13,38 @@ const starshipSchema = mongoose.Schema({
     type: String,
   },
   cost_in_credits: {
-    type: String,
+    type: Number,
+    default: 10000000,
   },
   length: {
-    type: String,
+    type: Number,
+    default: 10000,
   },
   max_atmosphering_speed: {
     type: String,
   },
   crew: {
-    type: String,
+    type: Number,
+    default: 100,
   },
   passengers: {
-    type: String,
+    type: Number,
+    default: 100,
   },
   cargo_capacity: {
-    type: String,
+    type: Number,
+    default: 10000,
   },
   consumables: {
     type: String,
   },
   hyperdrive_rating: {
-    type: String,
+    type: Number,
+    default: 2.0,
   },
   MGLT: {
-    type: String,
+    type: Number,
+    default: 5,
   },
   starship_class: {
     type: String,

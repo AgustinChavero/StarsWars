@@ -10,18 +10,25 @@ const filmSchema = new mongoose.Schema(
     },
     episode_id: {
       type: Number,
+      default: 1.0,
     },
     opening_crawl: {
       type: String,
+      trim: true,
     },
     director: {
       type: String,
+      trim: true,
+      default: "Agustin Chavero",
     },
     producer: {
       type: String,
+      trim: true,
+      default: "Agustin Chavero",
     },
     release_date: {
       type: String,
+      trim: true,
     },
     characters: {
       type: [String],
@@ -40,6 +47,7 @@ const filmSchema = new mongoose.Schema(
     },
     is_deleted: {
       type: Boolean,
+      default: false,
     },
   },
   {
