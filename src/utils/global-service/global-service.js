@@ -1,54 +1,49 @@
 const { ClientError } = require("../utils/error/error");
 
-const deleteItem = async (id, model, name) => {
-  const updateItem = await model.findOne({ where: { id } });
+const deleteElement = async (id, model, name) => {
+  const elementToDelete = await model.findById(id);
+  if (!elementToDelete) throw new Error(`${name} not found`);
 
-  if (!updateItem) throw new ClientError(`${name} not found`, 404);
+  elementToDelete.isDeleted = true;
+  await elementToDelete.save();
 
-  await updateItem.update({ isDeleted: true });
-
-  await updateItem.save();
-
-  return updateItem;
+  return elementToDelete;
 };
 
-const findItem = async (id, model, name) => {
-  const itemFind = await model.findByPk(id);
+const findElement = async (id, model, name) => {
+  const elementToFind = await model.findById(id);
+  if (!elementToFind) throw new Error(`${name} not found`);
 
-  if (!itemFind) throw new ClientError(`${name} not found`, 404);
-
-  return itemFind;
+  return elementToFind;
 };
 
-const patchItem = async (id, body, model, name) => {
-  const itemPatch = await model.findOne({ where: { id } });
+const patchElement = async (id, body, model, name) => {
+  const elementToPatch = await model.findById(id);
+  if (!elementToPatch) throw new Error(`${name} not found`);
 
-  if (!itemPatch) throw new ClientError(`${name} not found`, 404);
+  for (const key in body) {
+    elementToPatch[key] = body[key];
+  }
+  await elementToPatch.save();
 
-  await itemPatch.update(body, { fields: Object.keys(body) });
-
-  await itemPatch.save();
-
-  return itemPatch;
+  return elementToPatch;
 };
 
-const updateItem = async (id, body, model, name) => {
-  const itemUpdate = await model.findOne({ where: { id } });
+const updateElement = async (id, body, model, name) => {
+  const elementToUpdate = await model.findById(id);
+  if (!elementToUpdate) throw new Error(`${name} not found`);
 
-  if (!itemUpdate) throw new ClientError(`${name} not found`, 404);
+  elementToUpdate.set(body);
+  await elementToUpdate.save();
 
-  await itemUpdate.update(body);
-
-  await itemUpdate.save();
-
-  return itemUpdate;
+  return elementToUpdate;
 };
 
 module.exports = {
   globalService: {
-    deleteItem,
-    findItem,
-    patchItem,
-    updateItem,
+    deleteElement,
+    findElement,
+    patchElement,
+    updateElement,
   },
 };
