@@ -1,6 +1,6 @@
 const Starship = require("./starship-model");
 const { ClientError } = require("../../utils/errors/error");
-const { customResponse } = require("../../utils/errors/custom-response");
+const { customResponse, catchedAsync } = require("../../utils/errors/index-error");
 const { globalService } = require("../../utils/global-service/global-service");
 
 const postStarship = (req, res) => {
@@ -54,10 +54,10 @@ const deleteStarship = (req, res) => {
 };
 
 module.exports = {
-  postStarship,
-  putStarship,
-  patchStarship,
-  getAllStarship,
-  getStarship,
-  deleteStarship,
+  postStarship: catchedAsync(postStarship),
+  putStarship: catchedAsync(putStarship),
+  patchStarship: catchedAsync(patchStarship),
+  getAllStarship: catchedAsync(getAllStarship),
+  getStarship: catchedAsync(getStarship),
+  deleteStarship: catchedAsync(deleteStarship),
 };

@@ -1,6 +1,6 @@
 const Film = require("./film-model");
 const { ClientError } = require("../../utils/errors/error");
-const { customResponse } = require("../../utils/errors/custom-response");
+const { customResponse, catchedAsync } = require("../../utils/errors/index-error");
 const { globalService } = require("../../utils/global-service/global-service");
 const { createFilm } = require("./film-service");
 
@@ -55,10 +55,10 @@ const deleteFilm = (req, res) => {
 };
 
 module.exports = {
-  postFilm,
-  putFilm,
-  patchFilm,
-  getAllFilm,
-  getFilm,
-  deleteFilm,
+  postFilm: catchedAsync(postFilm),
+  putFilm: catchedAsync(putFilm),
+  patchFilm: catchedAsync(patchFilm),
+  getAllFilm: catchedAsync(getAllFilm),
+  getFilm: catchedAsync(getFilm),
+  deleteFilm: catchedAsync(deleteFilm),
 };

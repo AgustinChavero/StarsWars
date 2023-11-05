@@ -1,6 +1,6 @@
 const Planet = require("./planet-model");
 const { ClientError } = require("../../utils/errors/error");
-const { customResponse } = require("../../utils/errors/custom-response");
+const { customResponse, catchedAsync } = require("../../utils/errors/index-error");
 const { globalService } = require("../../utils/global-service/global-service");
 const { createPlanet } = require("./planet-service");
 
@@ -55,10 +55,10 @@ const deletePlanet = (req, res) => {
 };
 
 module.exports = {
-  postPlanet,
-  putPlanet,
-  patchPlanet,
-  getAllPlanet,
-  getPlanet,
-  deletePlanet,
+  postPlanet: catchedAsync(postPlanet),
+  putPlanet: catchedAsync(putPlanet),
+  patchPlanet: catchedAsync(patchPlanet),
+  getAllPlanet: catchedAsync(getAllPlanet),
+  getPlanet: catchedAsync(getPlanet),
+  deletePlanet: catchedAsync(deletePlanet),
 };

@@ -1,6 +1,6 @@
 const People = require("./people-model");
 const { ClientError } = require("../../utils/errors/error");
-const { customResponse } = require("../../utils/errors/custom-response");
+const { customResponse, catchedAsync } = require("../../utils/errors/index-error");
 const { globalService } = require("../../utils/global-service/global-service");
 
 const postPeople = (req, res) => {
@@ -54,10 +54,10 @@ const deletePeople = (req, res) => {
 };
 
 module.exports = {
-  postPeople,
-  putPeople,
-  patchPeople,
-  getAllPeople,
-  getPeople,
-  deletePeople,
+  postPeople: catchedAsync(postPeople),
+  putPeople: catchedAsync(putPeople),
+  patchPeople: catchedAsync(patchPeople),
+  getAllPeople: catchedAsync(getAllPeople),
+  getPeople: catchedAsync(getPeople),
+  deletePeople: catchedAsync(deletePeople),
 };
