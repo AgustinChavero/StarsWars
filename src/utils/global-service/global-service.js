@@ -1,20 +1,13 @@
 const { ClientError } = require("../utils/error/error");
 
-const deleteElement = async (id, model, name) => {
-  const elementToDelete = await model.findById(id);
-  if (!elementToDelete) throw new ClientError(`${name} not found`);
+const updateElement = async (id, body, model, name) => {
+  const elementToUpdate = await model.findById(id);
+  if (!elementToUpdate) throw new ClientError(`${name} not found`);
 
-  elementToDelete.isDeleted = true;
-  await elementToDelete.save();
+  elementToUpdate.set(body);
+  await elementToUpdate.save();
 
-  return elementToDelete;
-};
-
-const findElement = async (id, model, name) => {
-  const elementToFind = await model.findById(id);
-  if (!elementToFind) throw new ClientError(`${name} not found`);
-
-  return elementToFind;
+  return elementToUpdate;
 };
 
 const patchElement = async (id, body, model, name) => {
@@ -29,21 +22,28 @@ const patchElement = async (id, body, model, name) => {
   return elementToPatch;
 };
 
-const updateElement = async (id, body, model, name) => {
-  const elementToUpdate = await model.findById(id);
-  if (!elementToUpdate) throw new ClientError(`${name} not found`);
+const findElement = async (id, model, name) => {
+  const elementToFind = await model.findById(id);
+  if (!elementToFind) throw new ClientError(`${name} not found`);
 
-  elementToUpdate.set(body);
-  await elementToUpdate.save();
+  return elementToFind;
+};
 
-  return elementToUpdate;
+const deleteElement = async (id, model, name) => {
+  const elementToDelete = await model.findById(id);
+  if (!elementToDelete) throw new ClientError(`${name} not found`);
+
+  elementToDelete.isDeleted = true;
+  await elementToDelete.save();
+
+  return elementToDelete;
 };
 
 module.exports = {
   globalService: {
-    deleteElement,
-    findElement,
-    patchElement,
     updateElement,
+    patchElement,
+    findElement,
+    deleteElement,
   },
 };
