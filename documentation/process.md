@@ -1,9 +1,5 @@
 # Proceso de desarrollo:
 
-    npm init
-
-    git init
-
 ### Instalacion de MongoDB
 
     npm i mongodb
@@ -35,3 +31,7 @@
     npm install --save-dev jest
 
 - Necesario para los test unitarios
+
+### Instalacion de Supertest
+
+    npm install --save-dev supertest
