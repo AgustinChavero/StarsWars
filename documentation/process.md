@@ -16,11 +16,9 @@
 
     npm i nodemon -D
 
--   En el archivo package.json agregar y sobre escribir la siguiente linea de codigo en *"scripts": {}*
+- En el archivo package.json agregar y sobre escribir la siguiente linea de codigo en _"scripts": {}_
 
-``
-"dev": "nodemon src/index.js"
-``
+`"dev": "nodemon src/index.js"`
 
 ### Instalacion de Morgan (para ver peticiones que llegan al servidor)
 
@@ -30,4 +28,10 @@
 
     npm i mongoose
 
--   Recordar que la conexion esta hecha en Mongo Atlas
+- Recordar que la conexion esta hecha en Mongo Atlas
+
+### Instalacion de Jest
+
+    npm install --save-dev jest
+
+- Necesario para los test unitarios

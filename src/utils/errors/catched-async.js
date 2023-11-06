@@ -4,4 +4,4 @@ const catchedAsync = (fn) => {
   };
 };
 
-module.exports = { catchedAsync };
+module.exports = catchedAsync;
