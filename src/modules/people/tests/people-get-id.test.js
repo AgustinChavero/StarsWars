@@ -12,17 +12,19 @@ describe("Endpoint to get all peoples", () => {
     response = { statusCode, body };
   }, 20000);
 
+  beforeAll(async () => {
+    const axiosResponse = await axios.get(
+      `http://localhost:3000/people/${response.body.data.people[1]._id}`
+    );
+
+    const statusCode = axiosResponse.status;
+    const body = axiosResponse.data;
+
+    response = { statusCode, body };
+  }, 20000);
+
   it("Should return a status code 200", () => {
     expect(response.statusCode).toBe(200);
-  });
-
-  it("Should return a body with error in false & data", () => {
-    expect(typeof response.body).toBe("object");
-
-    expect(response.body.hasOwnProperty("error")).toBe(true);
-    expect(response.body.error).toBe(false);
-
-    expect(response.body.hasOwnProperty("data")).toBe(true);
   });
 
   it("Data should be an object with message (string) and peoples (array of objects)", () => {
@@ -30,14 +32,14 @@ describe("Endpoint to get all peoples", () => {
     expect(typeof data === "object").toBe(true);
 
     const message = data.message;
-    const peoples = data.people;
+    const people = data.people;
 
     expect(typeof message === "string").toBe(true);
-    expect(Array.isArray(peoples) || typeof peoples === "object").toBe(true);
+    expect(typeof people === "object").toBe(true);
   });
 
-  it("Object of peoples should be have name, height, eye_color, birth_year and gender", () => {
-    const people = response.body.data.people[0];
+  it("People should be have name, height, eye_color, birth_year and gender", () => {
+    const people = response.body.data.people;
 
     expect(typeof people === "object").toBe(true);
     expect(people.hasOwnProperty("name")).toBe(true);

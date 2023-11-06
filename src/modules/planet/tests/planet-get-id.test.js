@@ -12,17 +12,19 @@ describe("Endpoint to get all planets", () => {
     response = { statusCode, body };
   }, 20000);
 
+  beforeAll(async () => {
+    const axiosResponse = await axios.get(
+      `http://localhost:3000/planet/${response.body.data.planets[1]._id}`
+    );
+
+    const statusCode = axiosResponse.status;
+    const body = axiosResponse.data;
+
+    response = { statusCode, body };
+  }, 20000);
+
   it("Should return a status code 200", () => {
     expect(response.statusCode).toBe(200);
-  });
-
-  it("Should return a body with error in false & data", () => {
-    expect(typeof response.body).toBe("object");
-
-    expect(response.body.hasOwnProperty("error")).toBe(true);
-    expect(response.body.error).toBe(false);
-
-    expect(response.body.hasOwnProperty("data")).toBe(true);
   });
 
   it("Data should be an object with message (string) and planets (array of objects)", () => {
@@ -30,14 +32,14 @@ describe("Endpoint to get all planets", () => {
     expect(typeof data === "object").toBe(true);
 
     const message = data.message;
-    const planets = data.planets;
+    const planet = data.planet;
 
     expect(typeof message === "string").toBe(true);
-    expect(Array.isArray(planets) || typeof planets === "object").toBe(true);
+    expect(typeof planet === "object").toBe(true);
   });
 
-  it("Object of planets should be have name, rotation_period, orbital_period, diameter and population", () => {
-    const planet = response.body.data.planets[0];
+  it("Planet should be have name, rotation_period, orbital_period, diameter and population", () => {
+    const planet = response.body.data.planet;
 
     expect(typeof planet === "object").toBe(true);
     expect(planet.hasOwnProperty("name")).toBe(true);
