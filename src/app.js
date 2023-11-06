@@ -3,6 +3,7 @@ const morgan = require("morgan");
 const customResponse = require("./utils/errors/custom-response");
 
 const routerApi = require("./modules/index-routes.js");
+const customError = require("./utils/errors/custom-error");
 
 const app = express();
 
@@ -24,9 +25,7 @@ app.use("/", routerApi);
 
 app.use((err, req, res, next) => {
   const { statusCode, message } = err;
-  console.log(statusCode);
-  console.log(err);
-  customResponse(res, statusCode, message);
+  customError(res, statusCode, message);
 });
 
 module.exports = app;
