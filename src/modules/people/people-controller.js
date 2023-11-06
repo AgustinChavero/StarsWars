@@ -3,58 +3,67 @@ const ClientError = require("../../utils/errors/error");
 const { customResponse, catchedAsync } = require("../../utils/errors/index-error");
 const { globalService } = require("../../utils/global-service/global-service");
 
-const postPeople = (req, res) => {
+const postPeople = async (req, res) => {
   const { body } = req;
 
-  const newPeople = globalService.createElement(body, People, "People");
-  if (!newPeople) throw new ClientError("People not found", 400);
+  const newPeople = await globalService.createElement(body, People);
+  if (!newPeople) throw new ClientError("People not created", 409);
 
   customResponse(res, 200, { message: "People created", newPeople });
 };
 
-const putPeople = (req, res) => {
+const putPeople = async (req, res) => {
   const { body } = req;
   const { id } = req.params;
 
-  const people = globalService.updateElement(id, body, People, "People");
-  if (!people) throw new ClientError("People not found", 400);
+  const findPeople = await globalService.findElement(id, People);
+  if (!findPeople) throw new ClientError("People not found", 409);
+
+  const people = await globalService.updateElement(id, body, People);
+  if (!people) throw new ClientError("People not updated", 404);
 
   customResponse(res, 200, { message: "People updated", people });
 };
 
-const patchPeople = (req, res) => {
+const patchPeople = async (req, res) => {
   const { body } = req;
   const { id } = req.params;
 
-  const people = globalService.patchElement(id, body, People, "People");
-  if (!people) throw new ClientError("People not found", 400);
+  const findPeople = await globalService.findElement(id, People);
+  if (!findPeople) throw new ClientError("People not found", 409);
+
+  const people = await globalService.patchElement(id, body, People);
+  if (!people) throw new ClientError("People not updated", 404);
 
   customResponse(res, 200, { message: "People updated", people });
 };
 
-const getAllPeople = (req, res) => {
+const getAllPeople = async (req, res) => {
   const { query } = req;
 
-  const peoples = globalService.findAllElement(People, query, "Peoples");
-  if (!peoples.length) throw new ClientError("Peoples not found", 400);
+  const peoples = await globalService.findAllElement(People, query, "Peoples");
+  if (!peoples.length) throw new ClientError("Peoples not found", 404);
 
   customResponse(res, 200, { message: "Peoples finded", peoples });
 };
 
-const getPeople = (req, res) => {
+const getPeople = async (req, res) => {
   const { id } = req.params;
 
-  const people = globalService.findElement(id, People, "People");
-  if (!people) throw new ClientError("People not found", 400);
+  const people = await globalService.findElement(id, People);
+  if (!people) throw new ClientError("People not found", 404);
 
   customResponse(res, 200, { message: "People finded", people });
 };
 
-const deletePeople = (req, res) => {
+const deletePeople = async (req, res) => {
   const { id } = req.params;
 
-  const people = globalService.deleteElement(id, People, "People");
-  if (!people) throw new ClientError("People not found", 400);
+  const findPeople = await globalService.findElement(id, People);
+  if (!findPeople) throw new ClientError("People not found", 409);
+
+  const people = await globalService.deleteElement(id, People);
+  if (!people) throw new ClientError("People not deleted", 404);
 
   customResponse(res, 200, { message: "People deleted", people });
 };

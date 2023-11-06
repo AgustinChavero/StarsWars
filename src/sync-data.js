@@ -16,9 +16,9 @@ const entityMappings = [
 async function clearData(model) {
   try {
     await model.deleteMany({});
-    console.log(`Eliminados todos los registros de ${model.collection.name}`);
+    console.log(`All records deleted from ${model.collection.name}`);
   } catch (error) {
-    console.error(`Error al eliminar registros de ${model.collection.name}:`, error);
+    console.error(`Error to delete records from ${model.collection.name}:`, error);
   }
 }
 
@@ -37,12 +37,12 @@ async function syncData() {
 
       await model.create(starWarsData);
 
-      console.log(`Sincronización exitosa de ${entityName}`);
+      console.log(`Successful synchronization of ${entityName}`);
     }
 
-    console.log("Sincronización de todas las entidades completada");
+    console.log("Synchronization of all entities completed");
   } catch (error) {
-    console.error("Error en la sincronización:", error);
+    console.error("Synchronization error:", error);
   }
 }
 

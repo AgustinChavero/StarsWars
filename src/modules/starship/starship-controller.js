@@ -3,58 +3,67 @@ const ClientError = require("../../utils/errors/error");
 const { customResponse, catchedAsync } = require("../../utils/errors/index-error");
 const { globalService } = require("../../utils/global-service/global-service");
 
-const postStarship = (req, res) => {
+const postStarship = async (req, res) => {
   const { body } = req;
 
-  const newStarship = globalService.createElement(body, Starship, "Starship");
-  if (!newStarship) throw new ClientError("Starship not created", 400);
+  const newStarship = await globalService.createElement(body, Starship);
+  if (!newStarship) throw new ClientError("Starship not created", 409);
 
   customResponse(res, 200, { message: "Starship created", newStarship });
 };
 
-const putStarship = (req, res) => {
+const putStarship = async (req, res) => {
   const { body } = req;
   const { id } = req.params;
 
-  const starship = globalService.updateElement(id, body, Starship, "Starship");
-  if (!starship) throw new ClientError("Starship not found", 400);
+  const findStarship = await globalService.findElement(id, Starship);
+  if (!findStarship) throw new ClientError("Starship not found", 409);
+
+  const starship = await globalService.updateElement(id, body, Starship);
+  if (!starship) throw new ClientError("Starship not updated", 404);
 
   customResponse(res, 200, { message: "Starship updated", starship });
 };
 
-const patchStarship = (req, res) => {
+const patchStarship = async (req, res) => {
   const { body } = req;
   const { id } = req.params;
 
-  const starship = globalService.patchElement(id, body, Starship, "Starship");
-  if (!starship) throw new ClientError("Starship not found", 400);
+  const findStarship = await globalService.findElement(id, Starship);
+  if (!findStarship) throw new ClientError("Starship not found", 409);
+
+  const starship = await globalService.patchElement(id, body, Starship);
+  if (!starship) throw new ClientError("Starship not updated", 404);
 
   customResponse(res, 200, { message: "Starship updated", starship });
 };
 
-const getAllStarship = (req, res) => {
+const getAllStarship = async (req, res) => {
   const { query } = req;
 
-  const starships = globalService.findAllElement(Starship, query, "Starships");
-  if (!starships.length) throw new ClientError("Starships not found", 400);
+  const elementsToFind = await globalService.findAllElement(Starship, query);
+  if (!elementsToFind.length) throw new ClientError("Starships not found", 404);
 
-  customResponse(res, 200, { message: "Starships finded", starships });
+  customResponse(res, 200, { message: "Starships finded", elementsToFind });
 };
 
-const getStarship = (req, res) => {
+const getStarship = async (req, res) => {
   const { id } = req.params;
 
-  const starship = globalService.findElement(id, Starship, "Starship");
-  if (!starship) throw new ClientError("Starship not found", 400);
+  const starship = await globalService.findElement(id, Starship);
+  if (!starship) throw new ClientError("Starship not found", 404);
 
   customResponse(res, 200, { message: "Starship finded", starship });
 };
 
-const deleteStarship = (req, res) => {
+const deleteStarship = async (req, res) => {
   const { id } = req.params;
 
-  const starship = globalService.deleteElement(id, Starship, "Starship");
-  if (!starship) throw new ClientError("Starship not found", 400);
+  const findStarship = await globalService.findElement(id, Starship);
+  if (!findStarship) throw new ClientError("Starship not found", 409);
+
+  const starship = await globalService.deleteElement(id, Starship);
+  if (!starship) throw new ClientError("Starship not deleted", 404);
 
   customResponse(res, 200, { message: "Starship deleted", starship });
 };

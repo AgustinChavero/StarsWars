@@ -1,13 +1,11 @@
-const { ClientError } = require("../errors/error");
-
-const createElement = async (body, model, name) => {
-  const newElement = await new model(body);
+const createElement = async (body, model) => {
+  const newElement = await model.create(body);
 
   return newElement;
 };
 
-const updateElement = async (id, body, model, name) => {
-  const elementToUpdate = await model.findById(id);
+const updateElement = async (id, body, model) => {
+  const elementToUpdate = await model.findByIdAndUpdate(id, body);
 
   elementToUpdate.set(body);
   await elementToUpdate.save();
@@ -15,7 +13,7 @@ const updateElement = async (id, body, model, name) => {
   return elementToUpdate;
 };
 
-const patchElement = async (id, body, model, name) => {
+const patchElement = async (id, body, model) => {
   const elementToPatch = await model.findById(id);
 
   for (const key in body) {
@@ -29,7 +27,7 @@ const patchElement = async (id, body, model, name) => {
 const findAllElement = async (model, query) => {
   const modelFields = Object.keys(model.schema.obj);
   const data = {
-    //is_deleted: false,
+    is_deleted: false,
   };
 
   modelFields.forEach((field) => {
@@ -43,13 +41,13 @@ const findAllElement = async (model, query) => {
   return elementsToFind;
 };
 
-const findElement = async (id, model, name) => {
+const findElement = async (id, model) => {
   const elementToFind = await model.findById(id);
 
   return elementToFind;
 };
 
-const deleteElement = async (id, model, name) => {
+const deleteElement = async (id, model) => {
   const elementToDelete = await model.findById(id);
 
   elementToDelete.is_deleted = true;
