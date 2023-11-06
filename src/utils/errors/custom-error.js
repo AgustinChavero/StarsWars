@@ -5,4 +5,4 @@ const customError = (res, status, message) => {
   });
 };
 
-module.exports = { customError };
+module.exports = customError;

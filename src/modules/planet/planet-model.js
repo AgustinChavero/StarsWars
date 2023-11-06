@@ -8,16 +8,16 @@ const planetSchema = new mongoose.Schema({
     unique: true,
   },
   rotation_period: {
-    type: Number,
-    default: 12,
+    type: String,
+    default: "12",
   },
   orbital_period: {
-    type: Number,
-    default: 365,
+    type: String,
+    default: "365",
   },
   diameter: {
-    type: Number,
-    default: 12742,
+    type: String,
+    default: "12742",
   },
   climate: {
     type: String,
@@ -29,12 +29,12 @@ const planetSchema = new mongoose.Schema({
     type: String,
   },
   surface_water: {
-    type: Number,
-    default: 8,
+    type: String,
+    default: "8",
   },
   population: {
-    type: Number,
-    default: 70000000000,
+    type: String,
+    default: "70000000000",
   },
   residents: {
     type: [String],

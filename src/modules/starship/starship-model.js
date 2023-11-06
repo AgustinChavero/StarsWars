@@ -13,27 +13,27 @@ const starshipSchema = new mongoose.Schema({
     type: String,
   },
   cost_in_credits: {
-    type: Number,
-    default: 10000000,
+    type: String,
+    default: "10000000",
   },
   length: {
-    type: Number,
-    default: 10000,
+    type: String,
+    default: "10000",
   },
   max_atmosphering_speed: {
     type: String,
   },
   crew: {
-    type: Number,
-    default: 100,
+    type: String,
+    default: "100",
   },
   passengers: {
-    type: Number,
-    default: 100,
+    type: String,
+    default: "100",
   },
   cargo_capacity: {
-    type: Number,
-    default: 10000,
+    type: String,
+    default: "10000",
   },
   consumables: {
     type: String,

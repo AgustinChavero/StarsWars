@@ -5,4 +5,4 @@ const customResponse = (res, statusCode, data) => {
   });
 };
 
-module.exports = { customResponse };
+module.exports = customResponse;
