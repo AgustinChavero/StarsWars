@@ -13,17 +13,6 @@ const updateElement = async (id, body, model) => {
   return elementToUpdate;
 };
 
-const patchElement = async (id, body, model) => {
-  const elementToPatch = await model.findById(id);
-
-  for (const key in body) {
-    elementToPatch[key] = body[key];
-  }
-  await elementToPatch.save();
-
-  return elementToPatch;
-};
-
 const findAllElement = async (model, query) => {
   const modelFields = Object.keys(model.schema.obj);
   const data = {
@@ -60,7 +49,6 @@ module.exports = {
   globalService: {
     createElement,
     updateElement,
-    patchElement,
     findAllElement,
     findElement,
     deleteElement,

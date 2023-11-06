@@ -4,7 +4,6 @@ const starshipRoute = Router();
 const {
   postStarship,
   putStarship,
-  patchStarship,
   getAllStarship,
   getStarship,
   deleteStarship,
@@ -13,7 +12,6 @@ const {
 starshipRoute
   .post("/", postStarship)
   .put("/:id", putStarship)
-  .patch("/:id", patchStarship)
   .get("/", getAllStarship)
   .get("/:id", getStarship)
   .delete("/:id", deleteStarship);

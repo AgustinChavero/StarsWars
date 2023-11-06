@@ -1,5 +1,5 @@
-const customError = (res, status, message) => {
-  res.status(status || 500).json({
+const customError = (res, statusCode, message) => {
+  res.status(statusCode || 500).json({
     error: true,
     message,
   });

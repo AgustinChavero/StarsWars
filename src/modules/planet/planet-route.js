@@ -4,7 +4,6 @@ const planetRoute = Router();
 const {
   postPlanet,
   putPlanet,
-  patchPlanet,
   getAllPlanet,
   getPlanet,
   deletePlanet,
@@ -13,7 +12,6 @@ const {
 planetRoute
   .post("/", postPlanet)
   .put("/:id", putPlanet)
-  .patch("/:id", patchPlanet)
   .get("/", getAllPlanet)
   .get("/:id", getPlanet)
   .delete("/:id", deletePlanet);

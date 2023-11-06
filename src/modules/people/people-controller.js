@@ -1,6 +1,11 @@
 const People = require("./people-model");
-const ClientError = require("../../utils/errors/error");
-const { customResponse, catchedAsync } = require("../../utils/errors/index-error");
+const ClientError = require("../../utils/errors/client-error");
+const { CastError } = require("mongoose").Error;
+const {
+  catchedAsync,
+  customResponse,
+  customError,
+} = require("../../utils/errors/index-error");
 const { globalService } = require("../../utils/global-service/global-service");
 
 const postPeople = async (req, res) => {
@@ -15,63 +20,77 @@ const postPeople = async (req, res) => {
 const putPeople = async (req, res) => {
   const { body } = req;
   const { id } = req.params;
+  //Me veo obligado a utilizar un try catch porque no entiendo como manejar por completo el catcheo de CastError en todas sus variables
+  try {
+    const findPeople = await globalService.findElement(id, People);
+    if (!findPeople) {
+      return customError(res, 404, "People not found");
+    }
 
-  const findPeople = await globalService.findElement(id, People);
-  if (!findPeople) throw new ClientError("People not found", 409);
+    const people = await globalService.updateElement(id, body, People);
+    if (!people) {
+      return customError(res, 409, "People not updated");
+    }
 
-  const people = await globalService.updateElement(id, body, People);
-  if (!people) throw new ClientError("People not updated", 404);
-
-  customResponse(res, 200, { message: "People updated", people });
-};
-
-const patchPeople = async (req, res) => {
-  const { body } = req;
-  const { id } = req.params;
-
-  const findPeople = await globalService.findElement(id, People);
-  if (!findPeople) throw new ClientError("People not found", 409);
-
-  const people = await globalService.patchElement(id, body, People);
-  if (!people) throw new ClientError("People not updated", 404);
-
-  customResponse(res, 200, { message: "People updated", people });
+    return customResponse(res, 200, { message: "People updated", people });
+  } catch (error) {
+    if (error instanceof CastError) {
+      return customError(res, 400, "Please verify ID");
+    }
+  }
 };
 
 const getAllPeople = async (req, res) => {
   const { query } = req;
 
-  const peoples = await globalService.findAllElement(People, query, "Peoples");
-  if (!peoples.length) throw new ClientError("Peoples not found", 404);
+  const people = await globalService.findAllElement(People, query);
+  if (!people.length) throw new ClientError("Peoples not found", 404);
 
-  customResponse(res, 200, { message: "Peoples finded", peoples });
+  customResponse(res, 200, { message: "Peoples finded", people });
 };
 
 const getPeople = async (req, res) => {
   const { id } = req.params;
+  //Me veo obligado a utilizar un try catch porque no entiendo como manejar por completo el catcheo de CastError en todas sus variables
+  try {
+    const people = await globalService.findElement(id, People);
+    if (!people) {
+      return customError(res, 404, "People not found");
+    }
 
-  const people = await globalService.findElement(id, People);
-  if (!people) throw new ClientError("People not found", 404);
-
-  customResponse(res, 200, { message: "People finded", people });
+    return customResponse(res, 200, { message: "People finded", people });
+  } catch (error) {
+    if (error instanceof CastError) {
+      return customError(res, 400, "Please verify ID");
+    }
+  }
 };
 
 const deletePeople = async (req, res) => {
   const { id } = req.params;
+  //Me veo obligado a utilizar un try catch porque no entiendo como manejar por completo el catcheo de CastError en todas sus variables
+  try {
+    const findPeople = await globalService.findElement(id, People);
+    if (!findPeople) {
+      return customError(res, 404, "People not found");
+    }
 
-  const findPeople = await globalService.findElement(id, People);
-  if (!findPeople) throw new ClientError("People not found", 409);
+    const people = await globalService.deleteElement(id, People);
+    if (!people) {
+      return customError(res, 409, "People not deleted");
+    }
 
-  const people = await globalService.deleteElement(id, People);
-  if (!people) throw new ClientError("People not deleted", 404);
-
-  customResponse(res, 200, { message: "People deleted", people });
+    return customResponse(res, 200, { message: "People deleted", people });
+  } catch (error) {
+    if (error instanceof CastError) {
+      return customError(res, 400, "Please verify ID");
+    }
+  }
 };
 
 module.exports = {
   postPeople: catchedAsync(postPeople),
   putPeople: catchedAsync(putPeople),
-  patchPeople: catchedAsync(patchPeople),
   getAllPeople: catchedAsync(getAllPeople),
   getPeople: catchedAsync(getPeople),
   deletePeople: catchedAsync(deletePeople),
