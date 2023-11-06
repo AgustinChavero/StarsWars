@@ -5,7 +5,7 @@ const { syncData } = require("./sync-data.js");
 async function startServer() {
   console.log("Starting the server...");
   await connectDatabase();
-  await syncData();
+  // await syncData();
   console.log("Server is ready and data has been synchronized.");
 }
 
