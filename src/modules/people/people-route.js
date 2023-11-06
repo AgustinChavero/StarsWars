@@ -10,6 +10,12 @@ const {
   deletePeople,
 } = require("./people-controller.js");
 
-peopleRoute.post("/").put("/:id").patch("/:id").get("/").get("/:id").delete("/:id");
+peopleRoute
+  .post("/", postPeople)
+  .put("/:id", putPeople)
+  .patch("/:id", patchPeople)
+  .get("/", getAllPeople)
+  .get("/:id", getPeople)
+  .delete("/:id", deletePeople);
 
 module.exports = peopleRoute;

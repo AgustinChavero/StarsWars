@@ -1,5 +1,5 @@
 const Starship = require("./starship-model");
-const { ClientError } = require("../../utils/errors/error");
+const ClientError = require("../../utils/errors/error");
 const { customResponse, catchedAsync } = require("../../utils/errors/index-error");
 const { globalService } = require("../../utils/global-service/global-service");
 

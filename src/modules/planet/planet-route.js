@@ -11,11 +11,11 @@ const {
 } = require("./planet-controller.js");
 
 planetRoute
-  .post("/")
-  .put("/:id")
-  .patch("/:id")
+  .post("/", postPlanet)
+  .put("/:id", putPlanet)
+  .patch("/:id", patchPlanet)
   .get("/", getAllPlanet)
-  .get("/:id")
-  .delete("/:id");
+  .get("/:id", getPlanet)
+  .delete("/:id", deletePlanet);
 
 module.exports = planetRoute;

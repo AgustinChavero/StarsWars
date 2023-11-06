@@ -10,6 +10,12 @@ const {
   deleteFilm,
 } = require("./film-controller.js");
 
-filmRoute.post("/").put("/:id").patch("/:id").get("/").get("/:id").delete("/:id");
+filmRoute
+  .post("/", postFilm)
+  .put("/:id", putFilm)
+  .patch("/:id", patchFilm)
+  .get("/", getAllFilm)
+  .get("/:id", getFilm)
+  .delete("/:id", deleteFilm);
 
 module.exports = filmRoute;
