@@ -5,6 +5,9 @@ src/
 │   │   │   ├── entidad-get-all.test.js             # Codigo que testea el get all de cada entidad
 │   │   │   ├── entidad-get-id.test.js              # Codigo que testea el get individual de cada entidad
 │   │   ├── ...
+│   │   ├── validations/                        # Carpeta donde se almacenan las validaciones
+│   │   │   ├── method-validation.js                # Codigo que valida la salida o entrada de informacion a la bd
+│   │   ├── ...
 │   │   ├── entidad-controller.js           # Codigo donde se almacenan los distintos controllers de cada entidad
 │   │   ├── entidad-model.js                # Codigo del modelo de cada entidad
 │   │   ├── entidad-route.js                # Codigo de las rutas de cada entidad

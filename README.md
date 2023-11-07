@@ -1,4 +1,4 @@
-# Node + Express + JavaScript + MongoDB + Mongoose + MongoDB Atlas + Jest:
+# Node + Express + JavaScript + MongoDB Atlas + Mongoose + Jest + Joi:
 
 ## API de Star Wars (https://swapi.dev/).
 

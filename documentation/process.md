@@ -39,3 +39,9 @@
 ### Instalacion de Supertest
 
     npm install --save-dev supertest
+
+### Instalacion de Joi
+
+    npm install joi
+
+- Necesario para validaciones

@@ -8,9 +8,10 @@ const {
   getFilm,
   deleteFilm,
 } = require("./film-controller.js");
+const { validatePostFilm } = require("./validations/film-post-validation.js");
 
 filmRoute
-  .post("/", postFilm)
+  .post("/", validatePostFilm, postFilm)
   .put("/:id", putFilm)
   .get("/", getAllFilm)
   .get("/:id", getFilm)
