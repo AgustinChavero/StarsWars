@@ -8,6 +8,10 @@
 
     npm i express
 
+### Instalacion de Axios
+
+    npm i axios
+
 ### Instalacion de Nodemon (para que el servidor se reinicie con cada cambio)
 
     npm i nodemon -D
