@@ -4,28 +4,32 @@
 
 ### Guia
 
-- Documentation-arquitecture.text
+#### Documentation-arquitecture.text
 
-        Se encuentra la arquitectura del proyecto y la explicacion de donde van los archivos y que hacen
+`Se encuentra la arquitectura del proyecto y la explicacion de donde van los archivos y que hacen`
 
-- Documentation-process.md
+#### Documentation-process.md
 
-        Se encuentran anotados todos las librerias que se instalaron en el proceso
+`Se encuentran anotados todos las librerias que se instalaron en el proceso`
 
-- Instalacion de dependencias:
+#### Documentation-starswars.postman_collection
 
-        Parado en la carpeta raiz, ejecutar:
+`Se encuentran para importar todos los endpoints del proyecto`
 
-  `npm i`
+#### Instalacion de dependencias
 
-- Inicializacion de la APIRest:
+`Parado en la carpeta raiz, ejecutar:`
 
-        Parado en la carpeta raiz, ejecutar:
+                npm i
 
-  `npm run dev`
+#### Inicializacion de la APIRest
 
-- Ejecucion de los tests:
+`Parado en la carpeta raiz, ejecutar:`
 
-        Parado en la carpeta raiz, ejecutar:
+                npm run dev
 
-  `npx jest`
+#### Ejecucion de los tests
+
+`Parado en la carpeta raiz, ejecutar`
+
+                npx jest
