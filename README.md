@@ -7,6 +7,7 @@
   - Tener en cuenta que cada vez que se inicie el backend se dropeara la base de datos y se resincronizara con la api de Starwars
   - Para realizar los testeos de los endpoints asi como todo el codigo utilice Postman, su archivo se encuentra en la carpeta documentation
   - Al ser algo hecho por solo una persona solo se hiso uso de la rama main
+  - Las credenciales de inicio se dejaran en el codigo y no se hara uso del .env para facilitar su testeo en los proximos dias
 
 ## API de Star Wars (https://swapi.dev/).
 
