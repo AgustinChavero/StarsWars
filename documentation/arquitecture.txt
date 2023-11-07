@@ -1,0 +1,31 @@
+src/
+├── modules/                        # Carpeta donde se almacenan las distintas entidad y sus codigos
+│   │   ├── entidad/                        # Carpeta donde se almacena cada entidad de forma individual y su codigo
+│   │   ├── tests/                              # Carpeta donde se almacenan los test
+│   │   │   ├── entidad-get-all.test.js             # Codigo que testea el get all de cada entidad
+│   │   │   ├── entidad-get-id.test.js              # Codigo que testea el get individual de cada entidad
+│   │   ├── ...
+│   │   ├── entidad-controller.js           # Codigo donde se almacenan los distintos controllers de cada entidad
+│   │   ├── entidad-model.js                # Codigo del modelo de cada entidad
+│   │   ├── entidad-route.js                # Codigo de las rutas de cada entidad
+│   └── ...
+│
+├── utils/                          # Carpeta para el codigo reutilizable
+│   ├── errors/                         # Carpeta para el manejo de errores
+│   │   ├── catched-async.js                # Codigo que catchea los errores de los controllers
+│   │   ├── client-error.js                 # Codigo que genera los errores personalizados
+│   │   ├── custom-error.js                 # Codigo que genera la respuesta custom de error
+│   │   ├── custom-response.js              # Codigo que genera la respuesta custom de exito
+│   │   ├── index-error.js                  # Codigo donde se importan todos los archivos de errors para su exportacion
+│   │
+│   └── global-service/             # Carpeta de archivos para el codigo que ejecutaran los controllers de cada entidad
+│       ├── global-service.js               # Codigo dinamico para la ejecucion de los distintos endpoints de "entidad-controller.js"
+│       └── ...
+├── ...
+│
+├── app.js                          # Codigo para la inicializacion de Express y su configuracion
+├── db.js                           # Codigo para la conexion a la base de datos
+├── index.js                        # Codigo para encender el Backend
+├── jest.config.js                  # Codigo donde se expecifica que archivos de pruebas deben ejecutarse
+├── sync-data.js                    # Codigo para dropper y sincronizar la base da datos con la api de Starwars
+└── ...
