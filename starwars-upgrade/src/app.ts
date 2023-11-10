@@ -1,19 +1,33 @@
 import fastify from "fastify";
+import morgan from "morgan";
+import fastifyAccepts from "@fastify/accepts";
 
-const app = fastify();
+import routerApi from "./modules/index-routes";
+import { customError } from "./services/global-errors/custom-error";
 
-app.get("/", async (request, reply) => {
-  reply.send({ message: "Hello, world!" });
+const app = fastify({ logger: true });
+
+app.addHook("preHandler", (request, reply, done) => {
+  reply.header("Access-Control-Allow-Origin", "*");
+  reply.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+  reply.header(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With, Content-Type, Content-Length"
+  );
+  reply.header("Access-Control-Allow-Credentials", "true");
+  done();
 });
 
-const start = async () => {
-  try {
-    await app.listen(3000);
-    console.log("Server is running on http://localhost:3000");
-  } catch (err) {
-    console.error("Error starting server:", err);
-    process.exit(1);
-  }
-};
+app.addHook("onRequest", (request, reply, done) => {
+  morgan("dev")(request.raw, reply.raw, done);
+});
+app.register(fastifyAccepts);
 
-start();
+app.register(routerApi, { prefix: "/" });
+
+app.setErrorHandler((error, request, reply) => {
+  const { statusCode, message } = error;
+  customError(reply, statusCode, message);
+});
+
+export default app;
