@@ -27,3 +27,15 @@
 ### Instalacion de Fastify
 
     pnpm install fastify
+
+### Instalacion de Jest
+
+    pnpm install jest
+
+### Instalacion de Nodemon
+
+    pnpm install nodemon
+
+### Instalacion de TS Node
+
+    pnpm install ts-node --save-dev
