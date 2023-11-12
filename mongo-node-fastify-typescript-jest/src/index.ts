@@ -1,8 +1,8 @@
 import fastify, { FastifyInstance } from "fastify";
-import connectDatabase from "./src/database/connect-database";
-import { errorHandler } from "./src/services/global-errors/custom-error";
+import connectDatabase from "./database/connect-database";
+import { errorHandler } from "./services/global-errors/custom-error";
 
-import filmRoute from "./src/modules/film/film-route";
+import filmRoute from "./modules/film/film-route";
 
 const app: FastifyInstance = fastify({ logger: true });
 export default app;
@@ -16,7 +16,7 @@ interface IQueryInterface {
 }
 
 interface IHearders {
-  "x-access-toke": string;
+  "x-access-token": string;
 }
 
 interface IReply {

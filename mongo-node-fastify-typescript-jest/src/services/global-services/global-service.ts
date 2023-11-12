@@ -30,11 +30,10 @@ export const findAllElement = async (
   const data: { [key: string]: any } = {
     is_deleted: false,
   };
-  console.log("Query:", query);
+
   for (const field in query) {
     if (modelFields.includes(field)) {
       data[field] = query[field];
-      console.log(query[field]);
     }
   }
 
