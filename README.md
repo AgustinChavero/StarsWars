@@ -1,6 +1,6 @@
 # API de Star Wars (https://swapi.dev/).
 
-- El proyecto esta hecho en dos partes, como veran estan divididas en carpetas que estan nombradas segun los lenguajes que se utilizaron, la unica diferencia entre ellas es la arquitectura y los lenguajes, su funcionamiento es el mismo.
+- El proyecto esta hecho en diferentes partes, como veran estan divididas en carpetas que estan nombradas segun lo que se utilizo, la unica diferencia entre ellas es la arquitectura y los lenguajes, su funcionamiento es el mismo.
 
   - MongoDB Atlas + Node + Express + Javascript + Mongoose + Jest + Joi:
   - MongoDB Atlas + Node + Fastify + TypeScript + Mongoose + Jest:
