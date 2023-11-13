@@ -3,11 +3,14 @@ import connectDatabase from "./database/connect-database";
 import { errorHandler } from "./services/global-errors/custom-error";
 
 import filmRoute from "./modules/film/film-route";
+import peopleRoutes from "./modules/people/people-route";
 
 const app: FastifyInstance = fastify({ logger: true });
 export default app;
 
 app.register(filmRoute);
+app.register(peopleRoutes);
+
 connectDatabase.connect();
 
 interface IQueryInterface {

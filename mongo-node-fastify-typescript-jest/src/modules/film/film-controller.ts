@@ -19,7 +19,7 @@ export const postFilm = async (
   const data: NewFilm = req.body;
 
   const exist = await findAllElement(data, Film);
-  if (exist.length) return errorResponse(reply, 409, "Film title already exists");
+  if (exist.length) return errorResponse(reply, 409, "Values no validates");
 
   const newFilm = await createElement(data, Film);
 
@@ -36,9 +36,9 @@ export const putFilm = async (
   const exist = await findElement(id, Film);
   if (!exist) return errorResponse(reply, 409, "Film doesn't exists");
 
-  const newFilm = await updateElement(id, data, Film);
+  const film = await updateElement(id, data, Film);
 
-  customResponse(reply, 200, { message: "Film edited", newFilm });
+  customResponse(reply, 200, { message: "Film edited", film });
 };
 
 export const getAllFilm = async (
@@ -74,7 +74,7 @@ export const deleteFilm = async (
   const exist = await findElement(id, Film);
   if (!exist) return errorResponse(reply, 409, "Film doesn't exists");
 
-  const newFilm = await deleteElement(id, Film);
+  const film = await deleteElement(id, Film);
 
-  customResponse(reply, 200, { message: "Film deleted", newFilm });
+  customResponse(reply, 200, { message: "Film deleted", film });
 };
