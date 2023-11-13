@@ -9,7 +9,6 @@ describe("Endpoint to get all films", () => {
     unit = await axios.get(
       `http://localhost:3000/film/${response.data.data.films[0]._id}`
     );
-    console.log(unit.data.data);
   }, 50000);
 
   it("Should return a status code 200", () => {

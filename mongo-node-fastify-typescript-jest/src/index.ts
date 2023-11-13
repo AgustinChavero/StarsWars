@@ -4,12 +4,16 @@ import { errorHandler } from "./services/global-errors/custom-error";
 
 import filmRoute from "./modules/film/film-route";
 import peopleRoutes from "./modules/people/people-route";
+import planetRoutes from "./modules/planet/planet-route";
+import starshipRoutes from "./modules/starship/starship-route";
 
 const app: FastifyInstance = fastify({ logger: true });
 export default app;
 
 app.register(filmRoute);
 app.register(peopleRoutes);
+app.register(planetRoutes);
+app.register(starshipRoutes);
 
 connectDatabase.connect();
 

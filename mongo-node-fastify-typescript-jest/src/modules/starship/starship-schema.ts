@@ -2,7 +2,6 @@ import mongoose, { Document, Schema } from "mongoose";
 
 export interface NewStarship {
   name: string;
-  models?: string;
   manufacturer?: string;
   cost_in_credits?: string;
   length?: string;
@@ -27,9 +26,6 @@ const starshipSchema = new Schema<NewStarshipDocument>(
       type: String,
       required: true,
       trim: true,
-    },
-    models: {
-      type: String,
     },
     manufacturer: {
       type: String,

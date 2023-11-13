@@ -4,7 +4,6 @@ describe("Endpoint to get all films", () => {
   let response: AxiosResponse;
 
   beforeAll(async () => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
     response = await axios.get("http://localhost:3000/film");
   }, 50000);
 
