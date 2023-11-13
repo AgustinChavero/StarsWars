@@ -1,5 +1,6 @@
 import fastify, { FastifyInstance } from "fastify";
 import connectDatabase from "./database/connect-database";
+import { syncData } from "./database/sync-data";
 import { errorHandler } from "./services/global-errors/custom-error";
 
 import filmRoute from "./modules/film/film-route";
@@ -10,10 +11,10 @@ import starshipRoutes from "./modules/starship/starship-route";
 const app: FastifyInstance = fastify({ logger: true });
 export default app;
 
-app.register(filmRoute);
+/* app.register(filmRoute);
 app.register(peopleRoutes);
 app.register(planetRoutes);
-app.register(starshipRoutes);
+app.register(starshipRoutes); */
 
 connectDatabase.connect();
 
@@ -32,7 +33,39 @@ interface IReply {
   body: any;
 }
 
-app.get<{ Querystring: IQueryInterface; Headers: IHearders; Reply: IReply }>(
+syncData().then(() => {
+  app.register(filmRoute);
+  app.register(peopleRoutes);
+  app.register(planetRoutes);
+  app.register(starshipRoutes);
+
+  app.get<{ Querystring: IQueryInterface; Headers: IHearders; Reply: IReply }>(
+    "/",
+    async (request, reply) => {
+      const { username, password } = request.query;
+      return reply.send({
+        code: 200,
+        message: "success",
+        body: {
+          error: false,
+          data: {},
+        },
+      });
+    }
+  );
+
+  app.setErrorHandler(errorHandler);
+
+  app.listen(3000, (err, address) => {
+    if (err) {
+      app.log.error(err);
+      process.exit(1);
+    }
+    app.log.info(`Info listening on ${address}`);
+  });
+});
+
+/* app.get<{ Querystring: IQueryInterface; Headers: IHearders; Reply: IReply }>(
   "/",
   async (request, reply) => {
     const { username, password } = request.query;
@@ -55,4 +88,4 @@ app.listen(3000, (err, address) => {
     process.exit(1);
   }
   app.log.info(`Info listening on ${address}`);
-});
+}); */

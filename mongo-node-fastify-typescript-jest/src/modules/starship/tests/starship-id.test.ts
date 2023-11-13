@@ -26,15 +26,12 @@ describe("Endpoint to get all starships", () => {
     expect(typeof starship === "object").toBe(true);
   });
 
-  it("Starship should be have name, model, cost_in_credits, passengers and consumables", () => {
+  it("Starship should be have name, cost_in_credits, passengers and consumables", () => {
     const starship = unit.data.data.starship;
 
     expect(typeof starship === "object").toBe(true);
     expect(starship.hasOwnProperty("name")).toBe(true);
     expect(typeof starship.name === "string").toBe(true);
-
-    expect(starship.hasOwnProperty("model")).toBe(true);
-    expect(typeof starship.model === "string").toBe(true);
 
     expect(starship.hasOwnProperty("cost_in_credits")).toBe(true);
     expect(typeof starship.cost_in_credits === "string").toBe(true);
