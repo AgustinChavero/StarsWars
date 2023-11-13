@@ -11,11 +11,6 @@ import starshipRoutes from "./modules/starship/starship-route";
 const app: FastifyInstance = fastify({ logger: true });
 export default app;
 
-/* app.register(filmRoute);
-app.register(peopleRoutes);
-app.register(planetRoutes);
-app.register(starshipRoutes); */
-
 connectDatabase.connect();
 
 interface IQueryInterface {
@@ -42,7 +37,6 @@ syncData().then(() => {
   app.get<{ Querystring: IQueryInterface; Headers: IHearders; Reply: IReply }>(
     "/",
     async (request, reply) => {
-      const { username, password } = request.query;
       return reply.send({
         code: 200,
         message: "success",
@@ -64,28 +58,3 @@ syncData().then(() => {
     app.log.info(`Info listening on ${address}`);
   });
 });
-
-/* app.get<{ Querystring: IQueryInterface; Headers: IHearders; Reply: IReply }>(
-  "/",
-  async (request, reply) => {
-    const { username, password } = request.query;
-    return reply.send({
-      code: 200,
-      message: "success",
-      body: {
-        error: false,
-        data: {},
-      },
-    });
-  }
-);
-
-app.setErrorHandler(errorHandler);
-
-app.listen(3000, (err, address) => {
-  if (err) {
-    app.log.error(err);
-    process.exit(1);
-  }
-  app.log.info(`Info listening on ${address}`);
-}); */

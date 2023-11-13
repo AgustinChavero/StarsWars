@@ -20,15 +20,6 @@ describe("Endpoint to get all peoples", () => {
     expect(response.data.hasOwnProperty("data")).toBe(true);
   });
 
-  it("Should return a body with error in false & data", () => {
-    expect(typeof response.data).toBe("object");
-
-    expect(response.data.hasOwnProperty("error")).toBe(true);
-    expect(response.data.error).toBe(false);
-
-    expect(response.data.hasOwnProperty("data")).toBe(true);
-  });
-
   it("Data should be an object with message (string) and peoples (array of objects)", () => {
     const data = response.data.data;
     expect(typeof data === "object").toBe(true);

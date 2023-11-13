@@ -1,5 +1,5 @@
 import axios from "axios";
-import mongoose, { Model } from "mongoose";
+import { Model } from "mongoose";
 
 import FilmModel from "../modules/film/film-schema";
 import PeopleModel from "../modules/people/people-schema";
