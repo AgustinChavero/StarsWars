@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import Film from "./film-schema";
-import { NewFilm } from "./film-schema";
+import { NewFilm } from "./film-interface";
 import { errorResponse } from "../../services/global-errors/custom-error";
 import { customResponse } from "../../services/global-errors/custom-response";
 
@@ -10,7 +10,7 @@ import {
   findAllElement,
   findElement,
   updateElement,
-} from "../../services/global-services/global-service";
+} from "../../services/global-functions/global-service";
 
 export const postFilm = async (
   req: FastifyRequest<{ Body: NewFilm }>,

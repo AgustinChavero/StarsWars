@@ -10,7 +10,7 @@ import {
   findAllElement,
   findElement,
   updateElement,
-} from "../../services/global-services/global-service";
+} from "../../services/global-functions/global-service";
 
 export const postPlanet = async (
   req: FastifyRequest<{ Body: NewPlanet }>,

@@ -1,12 +1,12 @@
 const Film = require("./film-model");
-const ClientError = require("../../utils/errors/client-error");
+const ClientError = require("../../services/global-errors/client-error");
 const { CastError } = require("mongoose").Error;
 const {
   catchedAsync,
   customResponse,
   customError,
-} = require("../../utils/errors/index-error");
-const { globalService } = require("../../utils/global-service/global-service");
+} = require("../../services/global-errors/index-error");
+const { globalService } = require("../../services/global-functions/global-function");
 
 const postFilm = async (req, res) => {
   const { body } = req;

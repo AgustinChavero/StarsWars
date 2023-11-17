@@ -21,8 +21,8 @@ src/
 │   │   ├── custom-response.js              # Codigo que genera la respuesta custom de exito
 │   │   ├── index-error.js                  # Codigo donde se importan todos los archivos de errors para su exportacion
 │   │
-│   └── global-service/             # Carpeta de archivos para el codigo que ejecutaran los controllers de cada entidad
-│       ├── global-service.js               # Codigo dinamico para la ejecucion de los distintos endpoints de "entidad-controller.js"
+│   └── global-function/            # Carpeta de archivos para el codigo que ejecutaran los controllers de cada entidad
+│       ├── global-functions.js             # Codigo dinamico para la ejecucion de los distintos endpoints de "entidad-controller.js"
 │       └── ...
 ├── ...
 │

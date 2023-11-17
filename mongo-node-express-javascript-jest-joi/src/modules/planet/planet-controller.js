@@ -1,12 +1,12 @@
 const Planet = require("./planet-model");
-const ClientError = require("../../utils/errors/client-error");
+const ClientError = require("../../services/global-errors/client-error");
 const { CastError } = require("mongoose").Error;
 const {
   catchedAsync,
   customResponse,
   customError,
-} = require("../../utils/errors/index-error");
-const { globalService } = require("../../utils/global-service/global-service");
+} = require("../../services/global-errors/index-error");
+const { globalService } = require("../../services/global-functions/global-function");
 
 const postPlanet = async (req, res) => {
   const { body } = req;

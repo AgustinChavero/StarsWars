@@ -1,10 +1,10 @@
+require("dotenv").config();
 const mongoose = require("mongoose");
 
 const connectDatabase = async () => {
   try {
     await mongoose.connect(
-      // Para hacer mas facil la ejecucion del proyecto dejo las credenciales aqui hasta nuevo aviso
-      "mongodb+srv://agustindanielchavero:fLxFjieDCiCs6DBP@cluster0.ysao6ts.mongodb.net/<Cluster0>?retryWrites=true&w=majority"
+      `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASS}@${process.env.DB_CLUSTER_DIR}<${process.env.DB_CLUSTER_NAME}>?retryWrites=true&w=majority`
     );
 
     console.log(">>> DB connected");
