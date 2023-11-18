@@ -1,18 +1,27 @@
 const Planet = require("./planet-model");
-const ClientError = require("../../utils/errors/client-error");
-const { CastError } = require("mongoose").Error;
+
+const { bodySchema, querySchema } = require("./planet-schema");
+const { paramsSchema } = require("../../services/global-validations/global-schema");
+const {
+  bodyValidation,
+  paramsValidation,
+  queryValidation,
+} = require("../../services/global-validations/global-validation");
+const { globalService } = require("../../services/global-functions/global-function");
 const {
   catchedAsync,
   customResponse,
   customError,
-} = require("../../utils/errors/index-error");
-const { globalService } = require("../../utils/global-service/global-service");
+} = require("../../services/global-errors/index-error");
 
 const postPlanet = async (req, res) => {
   const { body } = req;
 
+  const bodyValidate = bodyValidation(bodySchema, req);
+  if (bodyValidate) return customError(res, 404, `${bodyValidate}`);
+
   const newPlanet = await globalService.createElement(body, Planet);
-  if (!newPlanet) throw new ClientError("Planet not created", 409);
+  if (!newPlanet) return customError(res, 409, "Planet not created");
 
   customResponse(res, 200, { message: "Planet created", newPlanet });
 };
@@ -20,72 +29,59 @@ const postPlanet = async (req, res) => {
 const putPlanet = async (req, res) => {
   const { body } = req;
   const { id } = req.params;
-  //Me veo obligado a utilizar un try catch porque no entiendo como manejar por completo el catcheo de CastError en todas sus variables
-  try {
-    const findPlanet = await globalService.findElement(id, Planet);
-    if (!findPlanet) {
-      return customError(res, 404, "Planet not found");
-    }
 
-    const planet = await globalService.updateElement(id, body, Planet);
-    if (!planet) {
-      return customError(res, 409, "Planet not updated");
-    }
+  const bodyValidate = bodyValidation(bodySchema, req);
+  if (bodyValidate) return customError(res, 404, `${bodyValidate}`);
 
-    return customResponse(res, 200, { message: "Planet updated", planet });
-  } catch (error) {
-    if (error instanceof CastError) {
-      return customError(res, 400, "Please verify ID");
-    }
-  }
+  const paramsValidate = paramsValidation(paramsSchema, req);
+  if (paramsValidate) return customError(res, 404, `${paramsValidate}`);
+
+  const findPlanet = await globalService.findElement(id, Planet);
+  if (!findPlanet) return customError(res, 404, "Planet not found");
+
+  const planet = await globalService.updateElement(id, body, Planet);
+  if (!planet) return customError(res, 409, "Planet not updated");
+
+  return customResponse(res, 200, { message: "Planet updated", planet });
 };
 
 const getAllPlanet = async (req, res) => {
   const { query } = req;
 
+  const queryValidate = queryValidation(querySchema, req);
+  if (queryValidate) return customError(res, 409, `${queryValidate}`);
+
   const planets = await globalService.findAllElement(Planet, query);
-  if (!planets.length) throw new ClientError("Planets not found", 404);
+  if (!planets.length) return customError(res, 404, "Planets not found");
 
   customResponse(res, 200, { message: "Planets finded", planets });
 };
 
 const getPlanet = async (req, res) => {
   const { id } = req.params;
-  //Me veo obligado a utilizar un try catch porque no entiendo como manejar por completo el catcheo de CastError en todas sus variables
-  try {
-    const planet = await globalService.findElement(id, Planet);
-    if (!planet) {
-      return customError(res, 404, "Planet not found");
-    }
 
-    return customResponse(res, 200, { message: "Planet finded", planet });
-  } catch (error) {
-    if (error instanceof CastError) {
-      return customError(res, 400, "Please verify ID");
-    }
-  }
+  const paramsValidate = paramsValidation(paramsSchema, req);
+  if (paramsValidate) return customError(res, 404, `${paramsValidate}`);
+
+  const planet = await globalService.findElement(id, Planet);
+  if (!planet) return customError(res, 404, "Planet not found");
+
+  return customResponse(res, 200, { message: "Planet finded", planet });
 };
 
 const deletePlanet = async (req, res) => {
   const { id } = req.params;
-  //Me veo obligado a utilizar un try catch porque no entiendo como manejar por completo el catcheo de CastError en todas sus variables
-  try {
-    const findPlanet = await globalService.findElement(id, Planet);
-    if (!findPlanet) {
-      return customError(res, 404, "Planet not found");
-    }
 
-    const planet = await globalService.deleteElement(id, Planet);
-    if (!planet) {
-      return customError(res, 409, "Planet not deleted");
-    }
+  const paramsValidate = paramsValidation(paramsSchema, req);
+  if (paramsValidate) return customError(res, 404, `${paramsValidate}`);
 
-    return customResponse(res, 200, { message: "Planet deleted", planet });
-  } catch (error) {
-    if (error instanceof CastError) {
-      return customError(res, 400, "Please verify ID");
-    }
-  }
+  const findPlanet = await globalService.findElement(id, Planet);
+  if (!findPlanet) return customError(res, 404, "Planet not found");
+
+  const planet = await globalService.deleteElement(id, Planet);
+  if (!planet) return customError(res, 409, "Planet not deleted");
+
+  return customResponse(res, 200, { message: "Planet deleted", planet });
 };
 
 module.exports = {

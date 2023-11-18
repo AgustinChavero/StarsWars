@@ -13,15 +13,11 @@
 
 ### Guia
 
-#### Documentation-arquitecture.text
+#### Docs-arquitecture.text
 
 `Se encuentra la arquitectura del proyecto y la explicacion de donde van los archivos y que hacen`
 
-#### Documentation-process.md
-
-`Se encuentran anotados todos las librerias que se instalaron en el proceso`
-
-#### Documentation-starswars.postman_collection
+#### Docs-starswars.postman_collection
 
 `Se encuentran para importar todos los endpoints del proyecto`
 

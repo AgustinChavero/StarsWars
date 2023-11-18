@@ -1,10 +1,9 @@
 const axios = require("axios");
-const mongoose = require("mongoose");
 
-const Film = require("./modules/film/film-model");
-const People = require("./modules/people/people-model");
-const Planet = require("./modules/planet/planet-model");
-const Starship = require("./modules/starship/starship-model");
+const Film = require("../modules/film/film-model");
+const People = require("../modules/people/people-model");
+const Planet = require("../modules/planet/planet-model");
+const Starship = require("../modules/starship/starship-model");
 
 const entityMappings = [
   { entityName: "films", model: Film },

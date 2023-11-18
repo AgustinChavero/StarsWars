@@ -1,6 +1,6 @@
 const app = require("./app.js");
-const { connectDatabase } = require("./db.js");
-const { syncData } = require("./sync-data.js");
+const { connectDatabase } = require("./database/connect-database.js");
+const { syncData } = require("./database/sync-data.js");
 
 async function startServer() {
   console.log("Starting the server...");

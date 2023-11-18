@@ -8,10 +8,9 @@ const {
   getStarship,
   deleteStarship,
 } = require("./starship-controller.js");
-const { validatePostStarship } = require("./validations/starship-post-validation.js");
 
 starshipRoute
-  .post("/", validatePostStarship, postStarship)
+  .post("/", postStarship)
   .put("/:id", putStarship)
   .get("/", getAllStarship)
   .get("/:id", getStarship)

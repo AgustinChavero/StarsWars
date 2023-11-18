@@ -5,7 +5,7 @@ const createElement = async (body, model) => {
 };
 
 const updateElement = async (id, body, model) => {
-  const elementToUpdate = await model.findByIdAndUpdate(id, body);
+  const elementToUpdate = await model.findById(id);
 
   elementToUpdate.set(body);
   await elementToUpdate.save();

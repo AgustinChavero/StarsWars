@@ -8,10 +8,9 @@ const {
   getPeople,
   deletePeople,
 } = require("./people-controller.js");
-const { validatePostPeople } = require("./validations/people-post-validation.js");
 
 peopleRoute
-  .post("/", validatePostPeople, postPeople)
+  .post("/", postPeople)
   .put("/:id", putPeople)
   .get("/", getAllPeople)
   .get("/:id", getPeople)
