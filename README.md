@@ -8,7 +8,7 @@
 - Comentarios:
   - La documentacion esta en español para el facil entendimiento
   - La nomenclatura del codigo, asi como el codigo, esta en ingles, inclusive los mensajes de error
-  - La arquitectura se hiso tomando de ejemplo la arquitectura horizontal y la mvc, buscando optimizar la velocidad del desarrollo del proyecto
+  - La arquitectura se hiso tomando de ejemplo la arquitectura horizontal y la mvc, buscando optimizar la velocidad del desarrollo de cualquier proyecto pequeño
   - Tener en cuenta que cada vez que se inicie el backend se dropeara la base de datos y se resincronizara con la api de Starwars
   - Para realizar los testeos de los endpoints pueden utilizar Postman, sus archivos se encuentra en la carpetas documentation
   - Al ser algo hecho por solo una persona solo se hiso uso de la rama main
