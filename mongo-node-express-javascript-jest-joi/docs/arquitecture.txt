@@ -1,0 +1,38 @@
+src/
+├── database/                       # Carpeta donde se almacena el codigo relacionado con la base de datos
+│   │   ├── connect-database.js             # Codigo encargado de conectarse a la base de datos
+│   │   ├── sync-data-js                    # Codigo encargado de la sincronizacion con la api de starwars
+│   └── ...
+│
+├── modules/                        # Carpeta donde se almacenan las distintas entidad y sus codigos
+│   │   ├── entidad/                        # Carpeta donde se almacena cada entidad de forma individual y su codigo
+│   │   ├── tests/                              # Carpeta donde se almacenan los test
+│   │   │   ├── entidad-get-all.test.js             # Codigo que testea el get all de cada entidad
+│   │   │   ├── entidad-get-id.test.js              # Codigo que testea el get individual de cada entidad
+│   │   ├── ...
+│   │   ├── entidad-controller.js           # Codigo donde se almacenan los distintos controllers de cada entidad
+│   │   ├── entidad-model.js                # Codigo del modelo de cada entidad
+│   │   ├── entidad-route.js                # Codigo de las rutas de cada entidad
+│   │   ├── entidad-schema.js               # Codigo de los schemas para la creacion y peticion con query de cada entidad
+│   └── ...
+│
+├── services/                       # Carpeta para el codigo reutilizable
+│   ├── global-errors/                      # Carpeta para el manejo de errores
+│   │   ├── catched-async.js                    # Codigo que catchea los errores de los controllers
+│   │   ├── custom-error.js                     # Codigo que genera la respuesta custom de error
+│   │   ├── custom-response.js                  # Codigo que genera la respuesta custom de exito
+│   │   ├── index-error.js                      # Codigo donde se importan todos los archivos de errors para su exportacion
+│   ├── ...
+│   ├── global-functions/           # Carpeta de archivos para el codigo que ejecutaran los controllers de cada entidad
+│   │   ├── global-functions.js             # Codigo dinamico para la ejecucion de los distintos endpoints de "entidad-controller.js"
+│   │   └── ...
+│   └── global-validations/         # Carpeta de archivos para el codigo que ejecutaran los controllers de cada entidad
+│       ├── global-schema.js                # Codigo donde se guardan los schemas generales
+│       ├── global-validation.js            # Codigo dinamico para la ejecucion de los distintas validaciones en "entidad-controller.js"
+│       └── ...
+├── ...
+│
+├── app.js                          # Codigo para la inicializacion de Express y su configuracion
+├── index.js                        # Codigo para encender el Backend
+├── jest.config.js                  # Codigo donde se expecifica que archivos de pruebas deben ejecutarse
+└── ...

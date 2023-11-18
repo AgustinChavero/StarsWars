@@ -8,10 +8,9 @@ const {
   getPlanet,
   deletePlanet,
 } = require("./planet-controller.js");
-const { validatePostPlanet } = require("./validations/planet-post-validation.js");
 
 planetRoute
-  .post("/", validatePostPlanet, postPlanet)
+  .post("/", postPlanet)
   .put("/:id", putPlanet)
   .get("/", getAllPlanet)
   .get("/:id", getPlanet)
