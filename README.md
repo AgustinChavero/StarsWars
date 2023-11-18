@@ -12,7 +12,6 @@
   - Tener en cuenta que cada vez que se inicie el backend se dropeara la base de datos y se resincronizara con la api de Starwars
   - Para realizar los testeos de los endpoints pueden utilizar Postman, sus archivos se encuentra en la carpetas documentation
   - Al ser algo hecho por solo una persona solo se hiso uso de la rama main
-  - Las credenciales de inicio se dejaran en el codigo y no se hara uso del .env para facilitar su testeo en los proximos dias
 
 ### Guia para todas las carpetas:
 
