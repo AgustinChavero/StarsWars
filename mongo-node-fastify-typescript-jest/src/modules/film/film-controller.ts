@@ -11,12 +11,17 @@ import {
   findElement,
   updateElement,
 } from "../../services/global-functions/global-service";
+import { bodyValidation } from "../../services/global-validations/global-validation";
+import { bodyDTO } from "./film-dto";
 
 export const postFilm = async (
   req: FastifyRequest<{ Body: NewFilm }>,
   reply: FastifyReply
 ): Promise<void> => {
   const data: NewFilm = req.body;
+
+  const bodyValidate = bodyValidation(bodyDTO, req);
+  if (bodyValidate) return errorResponse(reply, 404, `${bodyValidate}`);
 
   const exist = await findAllElement(data, Film);
   if (exist.length) return errorResponse(reply, 409, "Values no validates");

@@ -19,10 +19,12 @@
   "author": "AgustinChavero",
   "license": "ISC",
   "dependencies": {
+    "@types/joi": "^17.2.3",
     "axios": "^1.6.1",
     "dotenv": "^16.3.1",
     "fastify": "^4.24.3",
     "jest-worker": "^29.7.0",
+    "joi": "^17.11.0",
     "mongoose": "^8.0.0",
     "nodemon": "^3.0.1",
     "supertest": "^6.3.3"
