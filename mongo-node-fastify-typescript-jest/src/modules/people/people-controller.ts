@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import People from "./people-schema";
-import { NewPeople } from "./people-schema";
+import { NewPeople } from "./people-interface";
 import { errorResponse } from "../../services/global-errors/custom-error";
 import { customResponse } from "../../services/global-errors/custom-response";
 
@@ -11,12 +11,17 @@ import {
   findElement,
   updateElement,
 } from "../../services/global-functions/global-service";
+import { bodyValidation } from "../../services/global-validations/global-validation";
+import { bodyDTO } from "./people-dto";
 
 export const postPeople = async (
   req: FastifyRequest<{ Body: NewPeople }>,
   reply: FastifyReply
 ): Promise<void> => {
   const data: NewPeople = req.body;
+
+  const bodyValidate = bodyValidation(bodyDTO, req);
+  if (bodyValidate) return errorResponse(reply, 404, `${bodyValidate}`);
 
   const exist = await findAllElement(data, People);
   if (exist.length) return errorResponse(reply, 409, "Values no validates");

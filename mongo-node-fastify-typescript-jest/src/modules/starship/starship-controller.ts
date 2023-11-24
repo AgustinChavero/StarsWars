@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import Starship from "./starship-schema";
-import { NewStarship } from "./starship-schema";
+import { NewStarship } from "./starship-interface";
 import { errorResponse } from "../../services/global-errors/custom-error";
 import { customResponse } from "../../services/global-errors/custom-response";
 
@@ -11,12 +11,17 @@ import {
   findElement,
   updateElement,
 } from "../../services/global-functions/global-service";
+import { bodyValidation } from "../../services/global-validations/global-validation";
+import { bodyDTO } from "./starship-dto";
 
 export const postStarship = async (
   req: FastifyRequest<{ Body: NewStarship }>,
   reply: FastifyReply
 ): Promise<void> => {
   const data: NewStarship = req.body;
+
+  const bodyValidate = bodyValidation(bodyDTO, req);
+  if (bodyValidate) return errorResponse(reply, 404, `${bodyValidate}`);
 
   const exist = await findAllElement(data, Starship);
   if (exist.length) return errorResponse(reply, 409, "Values no validates");
