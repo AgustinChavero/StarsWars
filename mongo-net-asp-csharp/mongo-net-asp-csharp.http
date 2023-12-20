@@ -1,0 +1,6 @@
+@mongo_net_asp_csharp_HostAddress = http://localhost:5296
+
+GET {{mongo_net_asp_csharp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

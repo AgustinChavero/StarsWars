@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace csharp_asp.Controllers
+namespace mongo_net_asp_csharp.Controllers
 {
     [ApiController]
     [Route("[controller]")]

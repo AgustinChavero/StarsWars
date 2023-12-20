@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "G0bxu0D0IVjpsugTCQ3LW4XIx5hwnTqcylQfiJRZI0Y=",
-  "Source": "csharp-asp",
-  "BasePath": "_content/csharp-asp",
+  "Hash": "oagN5AMyxhQXv+6+SXBHALzbHnPNyKJNKl8RAEjbVl4=",
+  "Source": "mongo-net-asp-csharp",
+  "BasePath": "_content/mongo-net-asp-csharp",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
