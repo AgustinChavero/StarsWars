@@ -7,7 +7,9 @@ using csharp_asp.services.database;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace csharp_asp.services.functions
 {
@@ -17,15 +19,18 @@ namespace csharp_asp.services.functions
         Task<List<T>> FindAllElement(Dictionary<string, object> query, string model);
         Task<T> FindElement(ObjectId id, string model);
     }
-
     public class GlobalFunctions<T> : IEntityService<T>
     {
         private readonly IMongoCollection<T> _collection;
 
-        public GlobalFunctions(string connectionString, string collectionName)
+        public GlobalFunctions(IConfiguration configuration, string collectionName)
         {
-            var dbConnection = new DatabaseConnection<T>(connectionString, collectionName);
-            _collection = dbConnection.GetCollection();
+            var connectionString = configuration.GetSection("Connection:DataBase").Value;
+            var databaseName = configuration.GetSection("Connection:DataBaseName").Value;
+
+            var mongoClient = new MongoClient(connectionString);
+            var database = mongoClient.GetDatabase(databaseName);
+            _collection = database.GetCollection<T>(collectionName);
         }
 
         public async Task<T> CreateElement(object body, string model)
@@ -38,9 +43,8 @@ namespace csharp_asp.services.functions
             if (modelType == null || !typeof(T).IsAssignableFrom(modelType))
                 throw new InvalidOperationException($"El modelo '{model}' no es compatible con el tipo '{typeof(T)}'.");
 
-            var document = (T)Activator.CreateInstance(modelType); // Crear una instancia del modelo
+            var document = (T)Activator.CreateInstance(modelType);
 
-            // Copiar propiedades del body al documento, excepto _id si existe
             foreach (var prop in modelType.GetProperties())
             {
                 if (prop.Name != "_id")

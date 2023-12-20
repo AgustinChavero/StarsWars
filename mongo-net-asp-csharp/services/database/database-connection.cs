@@ -1,5 +1,4 @@
 ﻿using MongoDB.Driver;
-using System;
 
 namespace csharp_asp.services.database
 {
@@ -7,10 +6,13 @@ namespace csharp_asp.services.database
     {
         private readonly IMongoCollection<T> _collection;
 
-        public DatabaseConnection(string connectionString, string collectionName)
+        public DatabaseConnection(IConfiguration configuration, string collectionName)
         {
+            var connectionString = configuration.GetSection("Connection:DataBase").Value;
+            var databaseName = configuration.GetSection("Connection:DataBaseName").Value;
+
             var mongoClient = new MongoClient(connectionString);
-            var database = mongoClient.GetDatabase("CsharpStarwars");
+            var database = mongoClient.GetDatabase(databaseName);
             _collection = database.GetCollection<T>(collectionName);
         }
 
@@ -20,6 +22,7 @@ namespace csharp_asp.services.database
         }
     }
 }
+
 
 
 
