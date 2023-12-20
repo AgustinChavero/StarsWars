@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\mongo-net-asp-csharp.props" />
+</Project>

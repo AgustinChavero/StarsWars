@@ -116,7 +116,7 @@
           }
         }
       },
-      "MongoDB.Bson/2.23.0": {
+      "MongoDB.Bson/2.23.1": {
         "type": "package",
         "dependencies": {
           "System.Memory": "4.5.5",
@@ -133,12 +133,12 @@
           }
         }
       },
-      "MongoDB.Driver/2.23.0": {
+      "MongoDB.Driver/2.23.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "2.0.0",
-          "MongoDB.Bson": "2.23.0",
-          "MongoDB.Driver.Core": "2.23.0",
+          "MongoDB.Bson": "2.23.1",
+          "MongoDB.Driver.Core": "2.23.1",
           "MongoDB.Libmongocrypt": "1.8.0"
         },
         "compile": {
@@ -152,13 +152,13 @@
           }
         }
       },
-      "MongoDB.Driver.Core/2.23.0": {
+      "MongoDB.Driver.Core/2.23.1": {
         "type": "package",
         "dependencies": {
           "AWSSDK.SecurityToken": "3.7.100.14",
           "DnsClient": "1.6.1",
           "Microsoft.Extensions.Logging.Abstractions": "2.0.0",
-          "MongoDB.Bson": "2.23.0",
+          "MongoDB.Bson": "2.23.1",
           "MongoDB.Libmongocrypt": "1.8.0",
           "SharpCompress": "0.30.1",
           "Snappier": "1.0.0",
@@ -782,10 +782,10 @@
         "version.txt"
       ]
     },
-    "MongoDB.Bson/2.23.0": {
-      "sha512": "kfWiI3HJofHXvOT2v9scAV8g3ggGH6ySS0o9T7QKtvQYYFeqD+bcnGYH5JmHqmSMr/hSPs1l9Ooy07c1mplDvg==",
+    "MongoDB.Bson/2.23.1": {
+      "sha512": "IX9tycM35xK5hFwnU+rzharPJOtKYtON6E6Lp2nwOVjh40TUcS/HYToEEWZkLgqKNMCfYPK3Fz3QUCxzhkQRGA==",
       "type": "package",
-      "path": "mongodb.bson/2.23.0",
+      "path": "mongodb.bson/2.23.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -794,15 +794,15 @@
         "lib/netstandard2.0/MongoDB.Bson.xml",
         "lib/netstandard2.1/MongoDB.Bson.dll",
         "lib/netstandard2.1/MongoDB.Bson.xml",
-        "mongodb.bson.2.23.0.nupkg.sha512",
+        "mongodb.bson.2.23.1.nupkg.sha512",
         "mongodb.bson.nuspec",
         "packageIcon.png"
       ]
     },
-    "MongoDB.Driver/2.23.0": {
-      "sha512": "uc7ziN9h7iozqeU8A2Pbmls0jq0g62HqL4nzY36RI/1tYFXGf4xk0ga+uKic4pSmPkwx2P7rLq2SzDZ9CNT1/w==",
+    "MongoDB.Driver/2.23.1": {
+      "sha512": "kidqCwGBuLBx2IcW4os3J6zsp9yaUWm7Sp8G08Nm2RVRSAf0cJXfsynl2wRWpHh0HgfIzzwkevP/qhfsKfu8bQ==",
       "type": "package",
-      "path": "mongodb.driver/2.23.0",
+      "path": "mongodb.driver/2.23.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -811,15 +811,15 @@
         "lib/netstandard2.0/MongoDB.Driver.xml",
         "lib/netstandard2.1/MongoDB.Driver.dll",
         "lib/netstandard2.1/MongoDB.Driver.xml",
-        "mongodb.driver.2.23.0.nupkg.sha512",
+        "mongodb.driver.2.23.1.nupkg.sha512",
         "mongodb.driver.nuspec",
         "packageIcon.png"
       ]
     },
-    "MongoDB.Driver.Core/2.23.0": {
-      "sha512": "mNDKiLdj8jeht0NiGI4erCyaFurNWEEwGAzlWk3iJ5fiCsvk2QNnNE6HnUvRk7hJCsnDu9WvVFtkSCDCif1Jeg==",
+    "MongoDB.Driver.Core/2.23.1": {
+      "sha512": "K8LMdnVgT82vdbSllv8VzjPOLa9k5rLcCBd1fG45z+QGJNPWzAFW5lLgLJQ7xXuJgQIwvP1DBx6X6ecWBtox7g==",
       "type": "package",
-      "path": "mongodb.driver.core/2.23.0",
+      "path": "mongodb.driver.core/2.23.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -829,7 +829,7 @@
         "lib/netstandard2.0/MongoDB.Driver.Core.xml",
         "lib/netstandard2.1/MongoDB.Driver.Core.dll",
         "lib/netstandard2.1/MongoDB.Driver.Core.xml",
-        "mongodb.driver.core.2.23.0.nupkg.sha512",
+        "mongodb.driver.core.2.23.1.nupkg.sha512",
         "mongodb.driver.core.nuspec",
         "packageIcon.png"
       ]
@@ -1191,7 +1191,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "MongoDB.Driver >= 2.23.0",
+      "MongoDB.Driver >= 2.23.1",
       "Swashbuckle.AspNetCore >= 6.4.0"
     ]
   },
@@ -1202,9 +1202,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Repositorios\\StarWars\\mongo-net-asp-csharp\\csharp-asp.csproj",
-      "projectName": "csharp-asp",
-      "projectPath": "C:\\Repositorios\\StarWars\\mongo-net-asp-csharp\\csharp-asp.csproj",
+      "projectUniqueName": "C:\\Repositorios\\StarWars\\mongo-net-asp-csharp\\mongo-net-asp-csharp.csproj",
+      "projectName": "mongo-net-asp-csharp",
+      "projectPath": "C:\\Repositorios\\StarWars\\mongo-net-asp-csharp\\mongo-net-asp-csharp.csproj",
       "packagesPath": "C:\\Users\\Agustin\\.nuget\\packages\\",
       "outputPath": "C:\\Repositorios\\StarWars\\mongo-net-asp-csharp\\obj\\",
       "projectStyle": "PackageReference",
@@ -1241,7 +1241,7 @@
         "dependencies": {
           "MongoDB.Driver": {
             "target": "Package",
-            "version": "[2.23.0, )"
+            "version": "[2.23.1, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",

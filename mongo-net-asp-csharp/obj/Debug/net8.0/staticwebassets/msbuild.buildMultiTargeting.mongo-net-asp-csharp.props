@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\mongo-net-asp-csharp.props" />
+</Project>

@@ -1,4 +1,4 @@
-namespace csharp_asp
+namespace mongo_net_asp_csharp
 {
     public class WeatherForecast
     {
