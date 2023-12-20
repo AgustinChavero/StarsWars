@@ -1,7 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\services"
+    "\\modules",
+    "\\modules\\film",
+    "\\services",
+    "\\services\\database",
+    "\\services\\functions"
   ],
+  "SelectedNode": "\\modules\\film\\film-controller.cs",
   "PreviewInSolutionExplorer": false
 }
