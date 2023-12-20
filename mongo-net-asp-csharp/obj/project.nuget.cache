@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gIemkI+BevxZgi7HIUpZDqXQ9spFNq1SYQVwdsxzN+KaATbKDxCN5jASTkGMjJT1eqNd/p1KXHQJKmTY2Ro9PQ==",
+  "dgSpecHash": "JsH+Ra9+PwKvQ7dXSh/7AFU6U1QcuBo5DnyoHrU/Q5U9PX4XbyvZo/h4UPxfrbDLGCb0Syv0jrW6fEysLg3VOw==",
   "success": true,
-  "projectFilePath": "C:\\Repositorios\\StarWars\\csharp-asp\\csharp-asp.csproj",
+  "projectFilePath": "C:\\Repositorios\\StarWars\\mongo-net-asp-csharp\\csharp-asp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Agustin\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\Agustin\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",

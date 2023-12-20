@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Repositorios\\StarWars\\csharp-asp\\csharp-asp.csproj": {}
+    "C:\\Repositorios\\StarWars\\mongo-net-asp-csharp\\csharp-asp.csproj": {}
   },
   "projects": {
-    "C:\\Repositorios\\StarWars\\csharp-asp\\csharp-asp.csproj": {
+    "C:\\Repositorios\\StarWars\\mongo-net-asp-csharp\\csharp-asp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Repositorios\\StarWars\\csharp-asp\\csharp-asp.csproj",
+        "projectUniqueName": "C:\\Repositorios\\StarWars\\mongo-net-asp-csharp\\csharp-asp.csproj",
         "projectName": "csharp-asp",
-        "projectPath": "C:\\Repositorios\\StarWars\\csharp-asp\\csharp-asp.csproj",
+        "projectPath": "C:\\Repositorios\\StarWars\\mongo-net-asp-csharp\\csharp-asp.csproj",
         "packagesPath": "C:\\Users\\Agustin\\.nuget\\packages\\",
-        "outputPath": "C:\\Repositorios\\StarWars\\csharp-asp\\obj\\",
+        "outputPath": "C:\\Repositorios\\StarWars\\mongo-net-asp-csharp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
