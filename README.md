@@ -25,19 +25,3 @@
 #### Docs-starswars.postman_collection
 
 `Se encuentran para importar todos los endpoints del proyecto`
-
-#### Instalacion de dependencias
-
-`Parado en la carpeta raiz de cada proyecto, ejecutar:`
-
-                npm i
-
-#### Inicializacion de la APIRest
-
-`Parado en la carpeta raiz de cada proyecto, ejecutar:`
-
-                npm run dev
-
-#### Ejecucion de los tests
-
-`Para ejecutar los test por favor leer los readme de cada carpeta`
