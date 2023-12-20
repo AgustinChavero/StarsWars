@@ -2,8 +2,10 @@
 
 - El proyecto esta hecho en diferentes partes, como veran estan divididas en carpetas que estan nombradas segun lo que se utilizo, la unica diferencia entre ellas es la arquitectura y los lenguajes, su funcionamiento es el mismo.
 
-  - MongoDB Atlas + Node + Express + Javascript + Mongoose + Jest + Joi:
-  - MongoDB Atlas + Node + Fastify + TypeScript + Mongoose + Jest:
+  - MongoDB Atlas + Node + Express + Javascript + Mongoose + Jest + Joi: Terminado
+  - MongoDB Atlas + Node + Fastify + TypeScript + Mongoose + Jest: Terminado
+  - Docker + MongoDB Atlas + Node + Fastify + Javascript + Mongoose + Jest + Joi: En proceso
+  - Csharp + AspNet: En proceso
 
 - Comentarios:
   - La documentacion esta en español para el facil entendimiento
