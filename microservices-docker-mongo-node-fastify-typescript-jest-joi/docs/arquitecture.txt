@@ -1,0 +1,29 @@
+src/
+├── database/                       # Carpeta donde se almacenan las distintas entidad y sus codigos
+│   │   ├── connect-database.js             # Codigo de la conexion de la base de datos
+│   │   ├── sync-data.js                    # Codigo para la sincronizacion de la base de datos de mongo y la api de starwars
+│   └── ...
+│
+├── modules/                        # Carpeta donde se almacenan las distintas entidad y sus codigos
+│   │   ├── entidad/                        # Carpeta donde se almacena cada entidad de forma individual y su codigo
+│   │   ├── tests/                              # Carpeta donde se almacenan los test
+│   │   │   ├── entidad-get-all.test.js             # Codigo que testea el get all de cada entidad
+│   │   │   └── entidad-get-id.test.js              # Codigo que testea el get individual de cada entidad
+│   │   ├── ...
+│   │   ├── entidad-controller.js           # Codigo donde se almacenan los distintos controllers de cada entidad
+│   │   ├── entidad-schema.js               # Codigo de los schemas de cada entidad
+│   │   └── entidad-route.js                # Codigo de las rutas de cada entidad
+│   └── ...
+│
+├── services/                       # Carpeta para el codigo reutilizable
+│   ├── global-errors/                      # Carpeta para el manejo de errores
+│   │   ├── custom-error.js                     # Codigo que genera la respuesta custom de error
+│   │   ├── custom-response.js                  # Codigo que genera la respuesta custom de exito
+│   │   └── ...
+│   └── global-services/                    # Carpeta de archivos para el codigo que ejecutaran los controllers de cada entidad
+│       ├── global-service.js                   # Codigo dinamico para la ejecucion de los distintos endpoints de "entidad-controller.js"
+│       └── ...
+│
+├── index.js                        # Codigo para encender el Backend
+├── jest.config.js                  # Codigo donde se expecifica que archivos de pruebas deben ejecutarse
+└── ...
