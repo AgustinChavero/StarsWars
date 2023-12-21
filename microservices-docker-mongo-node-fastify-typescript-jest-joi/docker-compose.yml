@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  film:
+    build:
+      context: ./film
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+
+  people:
+    build:
+      context: ./people
+    ports:
+      - "3001:3001"
+    env_file:
+      - .env
+
+  planet:
+    build:
+      context: ./planet
+    ports:
+      - "3002:3002"
+    env_file:
+      - .env
+
+  starship:
+    build:
+      context: ./starship
+    ports:
+      - "3003:3003"
+    env_file:
+      - .env
