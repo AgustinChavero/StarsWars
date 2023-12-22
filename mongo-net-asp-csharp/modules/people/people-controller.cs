@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using MongoDB.Bson;
+using System.Text.Json;
 
 namespace csharp_asp.modules.people
 {
@@ -15,6 +16,13 @@ namespace csharp_asp.modules.people
         {
             _globalFunctions = globalFunctions;
         }
+
+        public class UpdateData
+        {
+            public string? FieldName { get; set; }
+            public object? NewValue { get; set; }
+        }
+
 
         [HttpPost]
         [IgnoreAntiforgeryToken]
@@ -34,16 +42,32 @@ namespace csharp_asp.modules.people
             }
         }
 
+        [HttpGet("all")]
+        public async Task<ActionResult> GetAllPeoples([FromQuery] Dictionary<string, object> query)
+        {
+            try
+            {
+                var result = await _globalFunctions.FindAllElement(query, "People");
+                if (result.Count == 0) return NotFound("Personas no encontradas");
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al obtener las personas: {ex.Message}");
+            }
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult> GetPeople(string id)
         {
             try
             {
                 var objectId = ObjectId.Parse(id);
-                var people = await _globalFunctions.FindElement(objectId, "People");
-                if (people == null) return NotFound("Persona no encontrada");
+                var result = await _globalFunctions.FindElement(objectId, "People");
+                if (result == null) return NotFound("Persona no encontrada");
 
-                return Ok(people);
+                return Ok(result);
             }
             catch (FormatException)
             {
@@ -55,23 +79,51 @@ namespace csharp_asp.modules.people
             }
         }
 
-        [HttpGet("all")]
-        public async Task<ActionResult> GetAllPeoples([FromQuery] Dictionary<string, object> query)
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdatePeople(string id, [FromBody] People body)
         {
             try
             {
-                var peoples = await _globalFunctions.FindAllElement(query, "People");
-                if (peoples.Count == 0) return NotFound("Personas no encontradas");
+                var objectId = ObjectId.Parse(id);
 
-                return Ok(peoples);
+                if (body == null) return BadRequest("Los datos de actualización no pueden estar vacíos.");
+
+                var result = await _globalFunctions.UpdateElement(objectId, body, "People");
+                if (result == null)  return NotFound("Persona no encontrada");
+
+                return Ok(result);
+            }
+            catch (FormatException)
+            {
+                return BadRequest("Formato de ID inválido");
             }
             catch (Exception ex)
             {
-                return StatusCode(404, $"Error al obtener las personas: {ex.Message}");
+                return StatusCode(500, $"Error al actualizar la persona: {ex.Message}");
             }
         }
 
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeletePeople(string id)
+        {
+            try
+            {
+                var objectId = ObjectId.Parse(id);
+                var result = await _globalFunctions.DeleteElement(objectId, "People");
 
+                if (result == null) return NotFound("Persona no encontrada");
+
+                return Ok(result);
+            }
+            catch (FormatException)
+            {
+                return BadRequest("Formato de ID inválido");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error al eliminar la persona: {ex.Message}");
+            }
+        }
 
     }
 }

@@ -1,9 +1,4 @@
-﻿
-//Task<T> UpdateElement(string id, object body, T model);
-//Task<List<T>> FindAllElement(T model, Dictionary<string, object> query);
-//Task<T> FindElement(string id, T model);
-//Task<T> DeleteElement(string id, T model);
-using csharp_asp.services.database;
+﻿using csharp_asp.services.database;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
@@ -16,8 +11,10 @@ namespace csharp_asp.services.functions
     public interface IEntityService<T>
     {
         Task<T> CreateElement(object body, string model);
-        Task<List<T>> FindAllElement(Dictionary<string, object> query, string model);
         Task<T> FindElement(ObjectId id, string model);
+        Task<List<T>> FindAllElement(Dictionary<string, object> query, string model);
+        Task<T> UpdateElement(ObjectId id, object body, string model);
+        Task<T> DeleteElement(ObjectId id, string model);
     }
     public class GlobalFunctions<T> : IEntityService<T>
     {
@@ -40,8 +37,7 @@ namespace csharp_asp.services.functions
             if (string.IsNullOrEmpty(model)) throw new InvalidOperationException("CreateElement necesita un nombre de modelo");
 
             var modelType = Type.GetType(model);
-            if (modelType == null || !typeof(T).IsAssignableFrom(modelType))
-                throw new InvalidOperationException($"El modelo '{model}' no es compatible con el tipo '{typeof(T)}'.");
+            if (modelType == null || !typeof(T).IsAssignableFrom(modelType)) throw new InvalidOperationException($"El modelo '{model}' no es compatible con el tipo '{typeof(T)}'.");
 
             var document = (T)Activator.CreateInstance(modelType);
 
@@ -55,7 +51,6 @@ namespace csharp_asp.services.functions
             }
 
             await _collection.InsertOneAsync(document);
-
             return document;
         }
 
@@ -71,12 +66,62 @@ namespace csharp_asp.services.functions
         public async Task<List<T>> FindAllElement(Dictionary<string, object> query, string model)
         {
             var filterBuilder = Builders<T>.Filter;
-            FilterDefinition<T> filter = filterBuilder.Empty;
+            var filter = filterBuilder.Empty;
+
+            if (query != null && query.Count > 0)
+            {
+                foreach (var item in query)
+                {
+                    filter &= filterBuilder.Eq(item.Key, item.Value);
+                }
+            }
 
             var result = await _collection.Find(filter).ToListAsync();
             return result;
         }
 
+        public async Task<T> UpdateElement(ObjectId id, object body, string model)
+        {
+            if (body == null) throw new InvalidOperationException("UpdateElement necesita un cuerpo");
+
+            if (string.IsNullOrEmpty(model)) throw new InvalidOperationException("UpdateElement necesita un nombre de modelo");
+
+            var filter = Builders<T>.Filter.Eq("_id", id);
+
+            var updateDefinition = Builders<T>.Update
+                .Set("UpdatedAt", DateTime.UtcNow);
+
+            var properties = body.GetType().GetProperties();
+            foreach (var property in properties)
+            {
+                var propertyName = property.Name;
+                var propertyValue = property.GetValue(body);
+
+                if (propertyValue != null && propertyName != "_id" && propertyName != "CreatedAt")
+                {
+                    updateDefinition = updateDefinition.Set(propertyName, propertyValue);
+                }
+            }
+
+            await _collection.UpdateOneAsync(filter, updateDefinition);
+
+            var updatedElement = await _collection.Find(filter).FirstOrDefaultAsync();
+            return updatedElement;
+        }
+
+
+        public async Task<T> DeleteElement(ObjectId id, string model)
+        {
+            if (string.IsNullOrEmpty(model)) throw new InvalidOperationException("DeleteElement necesita un nombre de modelo");
+
+            var filter = Builders<T>.Filter.Eq("_id", id);
+            var updateDefinition = Builders<T>.Update.Set("IsDeleted", true);
+
+            await _collection.UpdateOneAsync(filter, updateDefinition);
+
+            var updatedElement = await _collection.Find(filter).FirstOrDefaultAsync();
+            return updatedElement;
+        }
     }
 }
 

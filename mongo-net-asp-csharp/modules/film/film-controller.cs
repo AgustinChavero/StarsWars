@@ -1,4 +1,5 @@
-﻿using csharp_asp.services.functions;
+﻿using csharp_asp.modules.people;
+using csharp_asp.services.functions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using MongoDB.Bson;
@@ -34,16 +35,32 @@ namespace csharp_asp.modules.film
             }
         }
 
+        [HttpGet("all")]
+        public async Task<ActionResult> GetAllFilms([FromQuery] Dictionary<string, object> query)
+        {
+            try
+            {
+                var result = await _globalFunctions.FindAllElement(query, "Film");
+                if (result.Count == 0) return NotFound("Films no encontradas");
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(404, $"Error al obtener las personas: {ex.Message}");
+            }
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult> GetFilm(string id)
         {
             try
             {
                 var objectId = ObjectId.Parse(id);
-                var film = await _globalFunctions.FindElement(objectId, "Film");
-                if (film == null) return NotFound("Película no encontrada");
+                var result = await _globalFunctions.FindElement(objectId, "Film");
+                if (result == null) return NotFound("Película no encontrada");
 
-                return Ok(film);
+                return Ok(result);
             }
             catch (FormatException)
             {
@@ -55,24 +72,51 @@ namespace csharp_asp.modules.film
             }
         }
 
-        [HttpGet("all")]
-        public async Task<ActionResult> GetAllFilms([FromQuery] Dictionary<string, object> query)
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateFilm(string id, [FromBody] Film body)
         {
             try
             {
-                var films = await _globalFunctions.FindAllElement(query, "Film");
-                if (films.Count == 0) return NotFound("Películas no encontradas");
+                var objectId = ObjectId.Parse(id);
 
-                return Ok(films);
+                if (body == null) return BadRequest("Los datos de actualización no pueden estar vacíos.");
+
+                var result = await _globalFunctions.UpdateElement(objectId, body, "Film");
+                if (result == null) return NotFound("Film no encontrado");
+
+                return Ok(result);
+            }
+            catch (FormatException)
+            {
+                return BadRequest("Formato de ID inválido");
             }
             catch (Exception ex)
             {
-                return StatusCode(404, $"Error al obtener las películas: {ex.Message}");
+                return StatusCode(500, $"Error al actualizar el film: {ex.Message}");
             }
         }
 
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteFilm(string id)
+        {
+            try
+            {
+                var objectId = ObjectId.Parse(id);
+                var result = await _globalFunctions.DeleteElement(objectId, "Film");
 
+                if (result == null) return NotFound("Film no encontrado");
 
+                return Ok(result);
+            }
+            catch (FormatException)
+            {
+                return BadRequest("Formato de ID inválido");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error al eliminar el film: {ex.Message}");
+            }
+        }
     }
 }
 

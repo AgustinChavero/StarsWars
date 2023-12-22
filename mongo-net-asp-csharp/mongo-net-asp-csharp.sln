@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mongo-net-asp-csharp", "mongo-net-asp-csharp.csproj", "{CEE1166C-6671-4C47-8191-9F868528FCB3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mongo-net-asp-csharp", "mongo-net-asp-csharp.csproj", "{0827CB91-8C46-4EB0-8C75-63A8E1125C00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CEE1166C-6671-4C47-8191-9F868528FCB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CEE1166C-6671-4C47-8191-9F868528FCB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CEE1166C-6671-4C47-8191-9F868528FCB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CEE1166C-6671-4C47-8191-9F868528FCB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0827CB91-8C46-4EB0-8C75-63A8E1125C00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0827CB91-8C46-4EB0-8C75-63A8E1125C00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0827CB91-8C46-4EB0-8C75-63A8E1125C00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0827CB91-8C46-4EB0-8C75-63A8E1125C00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {F2CD2994-9097-46BE-8E1A-739B3DF49C07}
+		SolutionGuid = {4F003F37-1773-42FE-AB83-235B59D864D9}
 	EndGlobalSection
 EndGlobal

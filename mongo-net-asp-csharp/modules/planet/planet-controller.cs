@@ -1,4 +1,5 @@
-﻿using csharp_asp.services.functions;
+﻿using csharp_asp.modules.film;
+using csharp_asp.services.functions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using MongoDB.Bson;
@@ -40,10 +41,10 @@ namespace csharp_asp.modules.planet
             try
             {
                 var objectId = ObjectId.Parse(id);
-                var planet = await _globalFunctions.FindElement(objectId, "Planet");
-                if (planet == null) return NotFound("Planeta no encontrado");
+                var result = await _globalFunctions.FindElement(objectId, "Planet");
+                if (result == null) return NotFound("Planeta no encontrado");
 
-                return Ok(planet);
+                return Ok(result);
             }
             catch (FormatException)
             {
@@ -60,10 +61,10 @@ namespace csharp_asp.modules.planet
         {
             try
             {
-                var planets = await _globalFunctions.FindAllElement(query, "Planet");
-                if (planets.Count == 0) return NotFound("Planetas no encontrados");
+                var result = await _globalFunctions.FindAllElement(query, "Planet");
+                if (result.Count == 0) return NotFound("Planetas no encontrados");
 
-                return Ok(planets);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -71,7 +72,50 @@ namespace csharp_asp.modules.planet
             }
         }
 
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdatePlanet(string id, [FromBody] Planet body)
+        {
+            try
+            {
+                var objectId = ObjectId.Parse(id);
 
+                if (body == null) return BadRequest("Los datos de actualización no pueden estar vacíos.");
 
+                var result = await _globalFunctions.UpdateElement(objectId, body, "Planet");
+                if (result == null) return NotFound("Planet no encontrado");
+
+                return Ok(result);
+            }
+            catch (FormatException)
+            {
+                return BadRequest("Formato de ID inválido");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error al actualizar el planeta: {ex.Message}");
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeletePlanet(string id)
+        {
+            try
+            {
+                var objectId = ObjectId.Parse(id);
+                var result = await _globalFunctions.DeleteElement(objectId, "Planet");
+
+                if (result == null) return NotFound("Planeta no encontrado");
+
+                return Ok(result);
+            }
+            catch (FormatException)
+            {
+                return BadRequest("Formato de ID inválido");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error al eliminar el planeta: {ex.Message}");
+            }
+        }
     }
 }
