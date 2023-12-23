@@ -1,12 +1,11 @@
 FROM node:18
 
-RUN mkdir -p /app
+COPY . .
 
-COPY . /app
+RUN npm install
 
-EXPOSE 3003
+RUN npm run build
 
-RUN ls
+EXPOSE 3000
 
-CMD ["node", "/app/dist/index.js"]
-
+CMD ["node", "/dist/index.js"]

@@ -4,6 +4,7 @@ services:
   film:
     build:
       context: ./film
+      dockerfile: ./Dockerfile
     ports:
       - "3000:3000"
     env_file:
@@ -12,23 +13,26 @@ services:
   people:
     build:
       context: ./people
+      dockerfile: ./Dockerfile
     ports:
-      - "3001:3001"
+      - "3001:3000"
     env_file:
       - .env
 
   planet:
     build:
       context: ./planet
+      dockerfile: ./Dockerfile
     ports:
-      - "3002:3002"
+      - "3002:3000"
     env_file:
       - .env
 
   starship:
     build:
       context: ./starship
+      dockerfile: ./Dockerfile
     ports:
-      - "3003:3003"
+      - "3003:3000"
     env_file:
       - .env

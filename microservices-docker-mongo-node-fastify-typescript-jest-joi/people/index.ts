@@ -1,3 +1,4 @@
+const host = "0.0.0.0";
 import fastify, { FastifyInstance } from "fastify";
 import connectDatabase from "./src/database/connect-database";
 import { syncData } from "./src/database/sync-data";
@@ -44,11 +45,10 @@ syncData().then(() => {
 
   app.setErrorHandler(errorHandler);
 
-  app.listen(3001, (err, address) => {
-    if (err) {
-      app.log.error(err);
-      process.exit(1);
+  app.listen(
+    { host, port: process.env.PORT || 3000 } as { host: string; port: number },
+    (err) => {
+      if (err) throw err;
     }
-    app.log.info(`Info listening on ${address}`);
-  });
+  );
 });
